@@ -23,9 +23,32 @@ export default function Voting() {
 
   const [disabledPoints, setDisabledPoints] = useState([]);
 
+  const [selectedPoints, setSelectedPoints] = useState({});
+
   const pushNumbers = (e, countryName) => {
     console.log(countryName, e.target.value);
-    setDisabledPoints([...disabledPoints, Number(e.target.value)]);
+    const point = Number(e.target.value);
+
+    setDisabledPoints((prevPoints) => {
+      // Entfernen  den vorherigen Punkt für dieses Land, wenn vorhanden
+      const previousPoint = selectedPoints[countryName];
+      const newPoints = previousPoint
+        ? prevPoints.filter((p) => p !== previousPoint)
+        : prevPoints;
+
+      // Füge den neuen Punkt hinzu, wenn er nicht bereits ausgewählt ist
+      if (!newPoints.includes(point)) {
+        newPoints.push(point);
+      }
+
+      return newPoints;
+    });
+
+    // Aktualisiere den ausgewählten Punkt für dieses Land
+    setSelectedPoints((prevSelectedPoints) => ({
+      ...prevSelectedPoints,
+      [countryName]: point,
+    }));
   };
 
   return (
