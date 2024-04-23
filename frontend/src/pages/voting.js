@@ -56,6 +56,7 @@ export default function Voting() {
       <Title>My Voting</Title>
 
       <MainContainer>
+        <hr />
         {countries
           .filter((country) => country.final)
           .map((country) => (
@@ -90,6 +91,7 @@ export default function Voting() {
                 <i>
                   <p className="song">"{country.song}"</p>
                 </i>
+                <hr />
               </div>
             </VoteContainer>
           ))}

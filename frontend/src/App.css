@@ -74,6 +74,12 @@ p {
   );
 }
 
+hr {
+  margin-top: 15px;
+  border: 1px solid var(--navbar);
+  width: 100%;
+}
+
 .navbar {
   right: 0;
   background-color: var(--navbar);

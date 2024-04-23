@@ -7,7 +7,6 @@ export const VoteContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: var(--textInContainer);
-  margin-bottom: 15px;
 
   padding-top: 10px;
   padding-bottom: 0px;
@@ -24,10 +23,16 @@ export const VoteContainer = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin-bottom: 5px;
 
     .song {
       padding-top: 5px;
     }
+  }
+
+  hr {
+    margin-top: 15px;
+    border: 0.5px solid var(--navbar);
   }
 
   input {
