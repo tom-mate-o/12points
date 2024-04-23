@@ -1,49 +1,49 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 // Icons
-import { HiOutlineHome } from "react-icons/hi";
-import { HiOutlineMail } from "react-icons/hi";
-import { HiOutlineCalendar } from "react-icons/hi";
-import { HiOutlineBell } from "react-icons/hi";
-import { HiOutlineUserAdd } from "react-icons/hi";
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { BiSolidHome } from 'react-icons/bi';
+import { IoSettingsSharp } from 'react-icons/io5';
+import { TiHeartFullOutline } from 'react-icons/ti';
+import { FaRankingStar } from 'react-icons/fa6';
+import { FaUserFriends } from 'react-icons/fa';
 
-export default function Navbar({isBellRed, handleIconClick}) {
+export default function Navbar({ isBellRed, handleIconClick }) {
+  return (
+    <div className="navbar">
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/feed">
+              <BiSolidHome onClick={handleIconClick} />
+            </NavLink>
+          </li>
 
+          <li>
+            <NavLink to="/voting">
+              <TiHeartFullOutline onClick={handleIconClick} />
+            </NavLink>
+          </li>
 
+          <li>
+            <NavLink to="/bet">
+              <FaRankingStar onClick={handleIconClick} />
+            </NavLink>
+          </li>
 
-    return (
-        <div className="navbar">
-          <nav>
-            <ul>
-              <li>
-                <NavLink to="/feed"><HiOutlineHome onClick={handleIconClick}/></NavLink>
-              </li>
+          <li>
+            <NavLink to="/friends">
+              <FaUserFriends onClick={handleIconClick} />
+            </NavLink>
+          </li>
 
-              <li>
-                <NavLink to="/messages"><HiOutlineMail onClick={handleIconClick}/></NavLink>
-              </li>
-              
-              <li>
-                <NavLink to="/calendararchive"><HiOutlineCalendar onClick={handleIconClick}/></NavLink>
-              </li>
-
-              <li>
-                <NavLink to="/addafriend"><HiOutlineUserAdd onClick={handleIconClick}/></NavLink>
-              </li>
-
-              <li>
-              
-                <NavLink to="/notifications"><HiOutlineBell onClick={handleIconClick} className={isBellRed ? "ringing" : ""}  /></NavLink>
-              </li>
-
-              <li>
-                <NavLink to="/settings"><HiOutlineUserCircle onClick={handleIconClick}/></NavLink>
-              </li>
-
-            </ul>
-          </nav>
-        </div>
-    );
+          <li>
+            <NavLink to="/settings">
+              <IoSettingsSharp onClick={handleIconClick} />
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
 }

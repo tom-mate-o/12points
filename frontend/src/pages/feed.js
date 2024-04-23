@@ -1,38 +1,48 @@
-import React from "react";
-import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-
+import React from 'react';
+import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import Countdown, { contdown } from '../components/countdown';
+import { TiHeartFullOutline } from 'react-icons/ti';
+import { FaRankingStar } from 'react-icons/fa6';
 
 //Costum Hooks
-import useMongoDBData from "../costumHooks/useMongoDBData";
+import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
 
 //Styled Components
-import { Title } from "../styledComponents/title";
-import { MainContainer } from "../styledComponents/mainContainer";
-import { GoodThingContainerBirdLeft } from "../styledComponents/goodThingContainerBirdLeft";
-import { GoodThingContainerBirdRight } from "../styledComponents/goodThingContainerBirdRight";
-import { Button } from "../styledComponents/button";
-import { HighlightedContainer } from "../styledComponents/hightlightedContainer";
-import { InfoContainer } from "../styledComponents/infoContainer";
-import { Boxtitle } from "../styledComponents/boxtitle";
+import { Title } from '../styledComponents/title';
+import { MainContainer } from '../styledComponents/mainContainer';
+import { GoodThingContainerBirdLeft } from '../styledComponents/goodThingContainerBirdLeft';
+import { GoodThingContainerBirdRight } from '../styledComponents/goodThingContainerBirdRight';
+import { Button } from '../styledComponents/button';
+import { HighlightedContainer } from '../styledComponents/hightlightedContainer';
+import { InfoContainer } from '../styledComponents/infoContainer';
+import { Boxtitle } from '../styledComponents/boxtitle';
 
-import { HiOutlineLightBulb } from "react-icons/hi";
-import { birbImages } from "../assets/birbs/birbsimgs";
+import { HiOutlineLightBulb } from 'react-icons/hi';
+import { birbImages } from '../assets/birbs/birbsimgs';
+import { SmallButtons } from '../styledComponents/smallButtons';
 
 export default function Feed() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
-  const {poolPosts, setPoolPosts} = useMongoDBData();
 
-  if (!poolPosts || poolPosts.length === 0) {
-    return <MainContainer>
-      <div><img className="birdImg" src={birbImages.pecking_animation} alt="birb1"></img>...Loading...</div>
-    </MainContainer>
+  const { userData, setUserData } = useMongoDBUserData([]);
+
+  if (!userData || userData.length === 0) {
+    return (
+      <MainContainer>
+        <div>
+          <img
+            className="birdImg"
+            src={birbImages.pecking_animation}
+            alt="birb1"
+          ></img>
+          ...Loading...
+        </div>
+      </MainContainer>
+    );
   }
-
-  const randomPost = poolPosts[Math.floor(Math.random() * poolPosts.length)];
 
   return (
     <div>
@@ -42,54 +52,54 @@ export default function Feed() {
           <HiOutlineLightBulb />
         </div>
         <div>
-          3 little Birbs fluttered to your doorstep. <br />
-          They brought 3 good things and kind words with them.
+          Welcome to Twelve Points <br />
+          Have a look how your friends voted
         </div>
       </InfoContainer>
       <MainContainer>
-        <Boxtitle>3 little Birbs from a Stranger</Boxtitle>
-        <GoodThingContainerBirdLeft>
-          <div>
-            <img className="birdImg" src={birbImages[randomPost.birb1]} alt="birb1"></img>
-          </div>
-          <div><p>{randomPost.goodthing1}</p></div>
-        </GoodThingContainerBirdLeft>
-        <GoodThingContainerBirdRight>
-          <div><p>{randomPost.goodthing2}</p></div>
-          <div>
-            <img className="birdImg" src={birbImages[randomPost.birb2]} alt="birb2"></img>
-          </div>
-        </GoodThingContainerBirdRight>
-        <GoodThingContainerBirdLeft>
-          <div>
-            <img className="birdImg" src={birbImages[randomPost.birb3]} alt="birb3"></img>
-          </div>
-          <div><p>{randomPost.goodthing3}</p></div>
-        </GoodThingContainerBirdLeft>
+        <Boxtitle>Your Friends</Boxtitle>
 
-        <Boxtitle>a message from that Person</Boxtitle>
-
-        <HighlightedContainer>
-          <p>{randomPost.message}</p>
-        </HighlightedContainer>
+        {userData.map((user) => (
+          <div key={user.id}>
+            <p>{user.username}</p>
+            <Button>
+              {user.voting && Object.keys(user.voting).length > 0
+                ? 'Voting'
+                : ''}
+            </Button>
+            <Button>
+              {' '}
+              {user.bet && Object.keys(user.bet).length > 0 ? 'Voting' : ''}
+            </Button>
+          </div>
+        ))}
       </MainContainer>
+
       <InfoContainer>
         <div className="bulbIcon">
           <HiOutlineLightBulb />
         </div>
         <div>
-          What was good about today? <br/>Name 3 things, and send them to strangers,
-          or to a friend.
+          Give your own points for your favourties
+          <br />
+          and place your bet for the finals
+          <br />
+          <Countdown />
         </div>
       </InfoContainer>
 
       <div className="buttonContainer">
-        <Button>
-          <NavLink to="/newpost">
-            <img className="writeImg" src={birbImages.writebutton} alt="hi"></img>
-            <p>send your own 3 little Birbs out into the wild or to a friend of yours</p>
-            </NavLink>
-            </Button>
+        <NavLink to="/voting">
+          <SmallButtons>
+            <TiHeartFullOutline />
+            <p>give your personal 12 points</p>
+          </SmallButtons>
+        </NavLink>
+        <NavLink to="/bet">
+          <SmallButtons>
+            <FaRankingStar /> <p>place your bet for the final</p>
+          </SmallButtons>
+        </NavLink>
       </div>
     </div>
   );
