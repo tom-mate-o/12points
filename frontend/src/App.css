@@ -1,25 +1,25 @@
-:root.sunriseSunset-theme{
+:root.sunriseSunset-theme {
   --background: #355070;
   --textOnBright: #355070;
-  --mainContainer: #6D597A;
-  --button: #B56576;
-  --navbar: #B56576;
-  --hoverButton: #E56B6F;
-  --highlightedContainer: #E88C7D;
-  --goodThingContainer: #EAAC8B;
-  --textOnDark: #EAAC8B;
-  --infoContainer: #EEBBA0;
-  --textInContainer: #EEBBA0;
-  --navBarIcons: #EEBBA0;
-  --textOnButton: #FFFFFF;
-  --fontFamily: 'Inria Serif', serif;
+  --mainContainer: #6d597a;
+  --button: #b56576;
+  --navbar: #b56576;
+  --hoverButton: #e56b6f;
+  --highlightedContainer: #e88c7d;
+  --goodThingContainer: #eaac8b;
+  --textOnDark: #eaac8b;
+  --infoContainer: #eebba0;
+  --textInContainer: #eebba0;
+  --navBarIcons: #eebba0;
+  --textOnButton: #ffffff;
+  --fontFamily: 'Poppins', sans-serif;
   --red: #de0000;
 }
 
 :root.dracula-theme {
   --background: #282a36;
   --textOnBright: #222222;
-  --mainContainer: #44475A;
+  --mainContainer: #44475a;
   --button: #6272a4;
   --navbar: #6272a4;
   --hoverButton: #bd93f9;
@@ -29,50 +29,59 @@
   --infoContainer: #ff79c6;
   --textInContainer: #f1fa8c;
   --navBarIcons: #f1fa8c;
-  --textOnButton: #FFFFFF;
-  --fontFamily: 'Inria Serif', serif;
+  --textOnButton: #ffffff;
+  --fontFamily: 'Poppins', sans-serif;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   width: 100vw;
   height: 100vh;
   background-color: var(--background);
   color: var(--textOnDark);
-  font-family: 'Inria Serif', serif;
+  font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
   overflow-y: scroll;
-
 }
-
-
 
 .App {
   display: flex;
   justify-content: center;
 
   height: auto;
-  
-
-
-  
 }
 
+h3 {
+  font-size: 0.625rem;
+  font-size: clamp(
+    0.625rem,
+    -0.0892857142857143rem + 5.714285714285714vw,
+    1.25rem
+  );
+}
 
+p {
+  font-size: 0.625rem;
+  font-size: clamp(
+    0.625rem,
+    0.26785714285714285rem + 2.857142857142857vw,
+    0.9375rem
+  );
+}
 
 .navbar {
   right: 0;
   background-color: var(--navbar);
   color: var(--navBarIcons);
- position: fixed;
- bottom: 0;
- width: 100%;
-font-size: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 20px;
 }
 
 .navbar ul {
@@ -95,7 +104,7 @@ font-size: 20px;
   text-decoration: none;
 }
 
-.navbar li a:visited{
+.navbar li a:visited {
   color: var(--navBarIcons);
 }
 
@@ -103,27 +112,24 @@ font-size: 20px;
   background-color: var(--hoverButton);
 }
 
-.contentContainer{
-
+.contentContainer {
   width: 100%;
   max-width: 500px;
 
   padding-top: 35px;
   padding-left: 15px;
   padding-bottom: 80px;
-  
 }
 
-.buttonContainer{
+.buttonContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;;
+  align-items: center;
   padding-top: 15px;
   gap: 15px;
   width: 100%;
 }
-
 
 .App-header {
   background-color: #355070;
@@ -149,63 +155,85 @@ font-size: 20px;
   }
 }
 
-.select{
+.select {
   font-family: 'Inria Serif', serif;
   width: 95%;
 }
 
-.logo{
+.logo {
   width: 100%;
   text-align: center;
   margin-bottom: 25px;
 
- 
-
-  img{
+  img {
     width: 50%;
     border-radius: 15px;
   }
-
-
 }
 
-.introtext{
+.introtext {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
-margin-bottom: 35px;
-padding-left: 30px;
-padding-right: 30px;
+  margin-bottom: 35px;
+  padding-left: 30px;
+  padding-right: 30px;
 
-p{
-  text-align: center;
-  font-size: 0.9rem;
+  p {
+    text-align: center;
+    font-size: 0.9rem;
+  }
 }
-}
-
-
 
 @keyframes colorPulse {
-  0% { color: white; }
-  50% { color: var(--navBarIcons); }
-  100% { color: white; }
+  0% {
+    color: white;
+  }
+  50% {
+    color: var(--navBarIcons);
+  }
+  100% {
+    color: white;
+  }
 }
 
 @keyframes ringing {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(25deg); }
-  20% { transform: rotate(-15deg); }
-  30% { transform: rotate(15deg); }
-  40% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-  60% { transform: rotate(-2deg); }
-  70% { transform: rotate(2deg); }
-  80% { transform: rotate(-1deg); }
-  90% { transform: rotate(1deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(25deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  30% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(-2deg);
+  }
+  70% {
+    transform: rotate(2deg);
+  }
+  80% {
+    transform: rotate(-1deg);
+  }
+  90% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .ringing {
@@ -225,6 +253,6 @@ p{
   bottom: 8rem !important;
 }
 
-a{
+a {
   text-decoration: none;
 }

@@ -10,6 +10,7 @@ import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
 
 //Styled Components
 import { Title } from '../styledComponents/title';
+import { FriendListGrid } from '../styledComponents/friendListGrid';
 import { MainContainer } from '../styledComponents/mainContainer';
 import { GoodThingContainerBirdLeft } from '../styledComponents/goodThingContainerBirdLeft';
 import { GoodThingContainerBirdRight } from '../styledComponents/goodThingContainerBirdRight';
@@ -60,18 +61,29 @@ export default function Feed() {
         <Boxtitle>Your Friends</Boxtitle>
 
         {userData.map((user) => (
-          <div key={user.id}>
-            <p>{user.username}</p>
-            <Button>
-              {user.voting && Object.keys(user.voting).length > 0
-                ? 'Voting'
-                : ''}
-            </Button>
-            <Button>
-              {' '}
-              {user.bet && Object.keys(user.bet).length > 0 ? 'Voting' : ''}
-            </Button>
-          </div>
+          <FriendListGrid key={user.id}>
+            <div className="avatar">A</div>
+            <div className="name">
+              <p>{user.username}</p>
+            </div>
+            <div className="buttonContainer">
+              {user.voting && Object.keys(user.voting).length > 0 ? (
+                <button>
+                  <TiHeartFullOutline />
+                </button>
+              ) : (
+                ''
+              )}
+
+              <button>
+                {user.bet && Object.keys(user.bet).length > 0 ? (
+                  <FaRankingStar />
+                ) : (
+                  ''
+                )}
+              </button>
+            </div>
+          </FriendListGrid>
         ))}
       </MainContainer>
 

@@ -53,41 +53,44 @@ export default function Voting() {
 
   return (
     <div>
-      <Title>Voting</Title>
+      <Title>My Voting</Title>
 
       <MainContainer>
-        <p>Voting</p>
-
         {countries
           .filter((country) => country.final)
           .map((country) => (
             <VoteContainer key={country.code}>
-              <img
-                className="countryFlag"
-                src={`/flags/${country.flag}.png`}
-                alt={country.name}
-              />
-              <div className="infoContainer">
-                <h3>
-                  <b>{country.name}</b>
-                </h3>
-                <p>{country.participant}</p>
-
-                <p>
-                  <i>"{country.song}"</i>
-                </p>
+              <div className="artistContainer">
+                <div className="rowContainer">
+                  <img
+                    className="countryFlag"
+                    src={`/flags/${country.flag}.png`}
+                    alt={country.name}
+                  />
+                  <div className="container">
+                    <div className="infoContainer">
+                      <h3>
+                        <b>{country.name}</b>
+                      </h3>
+                      <p>{country.participant}</p>
+                    </div>
+                    <select onChange={(e) => pushNumbers(e, country.name)}>
+                      {pointArray.map((point, index) => (
+                        <option
+                          key={index}
+                          value={point}
+                          disabled={disabledPoints.includes(point)}
+                        >
+                          {point}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <i>
+                  <p className="song">"{country.song}"</p>
+                </i>
               </div>
-              <select onChange={(e) => pushNumbers(e, country.name)}>
-                {pointArray.map((point, index) => (
-                  <option
-                    key={index}
-                    value={point}
-                    disabled={disabledPoints.includes(point)}
-                  >
-                    {point}
-                  </option>
-                ))}
-              </select>
             </VoteContainer>
           ))}
       </MainContainer>
