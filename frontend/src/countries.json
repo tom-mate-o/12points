@@ -6,6 +6,7 @@
     "participant": "BESA",
     "song": "TITAN",
     "url": "https://eurovision.tv/participant/besa-2024",
+    "spotify": "https://open.spotify.com/embed/track/0uHrMbMv3c78398pIANDqR?utm_source=generator&theme=0",
     "final": true,
     "startnumber": 1,
     "points": 0,
@@ -78,6 +79,7 @@
     "participant": "Baby Lasagna",
     "song": "Rim Tim Tagi Dim",
     "url": "https://eurovision.tv/participant/baby-lasagna-2024",
+    "spotify": "https://open.spotify.com/embed/track/5TswDbxMnxptgFTf6ZxvXQ?utm_source=generator&theme=0",
     "final": true,
     "startnumber": 1,
     "points": 0,
@@ -234,6 +236,7 @@
     "participant": "Angelina Mango",
     "song": "La noia",
     "url": "https://eurovision.tv/participant/angelina-mango-2024",
+    "spotify": "https://open.spotify.com/embed/track/49R1F3rIdSzuPk7AcHi6d1?utm_source=generator&theme=0",
     "final": true,
     "startnumber": 1,
     "points": 0,
@@ -306,6 +309,9 @@
     "participant": "Joost Klein",
     "song": "Europapa",
     "url": "https://eurovision.tv/participant/joost-klein-2024",
+
+    "spotify": "https://open.spotify.com/embed/track/0uHrMbMv3c78398pIANDqR?utm_source=generator&theme=0",
+
     "final": true,
     "startnumber": 1,
     "points": 0,
@@ -414,6 +420,8 @@
     "participant": "Nemo",
     "song": "The Code",
     "url": "https://eurovision.tv/participant/nemo-2024",
+
+    "spotify": "https://open.spotify.com/embed/track/1EjIXKhNHI00ZLMRpS8iz8?utm_source=generator&theme=0",
     "final": true,
     "startnumber": 1,
     "points": 0,
