@@ -30,11 +30,6 @@ export const VoteContainer = styled.div`
     }
   }
 
-  hr {
-    margin-top: 15px;
-    border: 0.5px solid var(--navbar);
-  }
-
   input {
     height: 50px;
     width: 50px;
@@ -89,15 +84,16 @@ export const VoteContainer = styled.div`
       1.7857142857142856rem + 5.714285714285714vw,
       3.125rem
     );
-    border-radius: 10px;
+
     border: none;
-    background-color: var(--button);
-    color: var(--textOnButton);
+    background-color: #1dc1df;
+    color: #000978;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
     margin-left: 10px;
-    padding: 5px;
+    padding: 10px;
   }
 
   a {

@@ -1,29 +1,58 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import countries from '../countries.json';
+
+import updateUserInDatabase from '../utils/updateUserInDatabase';
+import { putPostIdToUserConfig } from '../utils/putPostIdToUserConfig';
+
+//Costum Hooks
+import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
 
 //Styled Components
 import { Title } from '../styledComponents/title';
 import { MainContainer } from '../styledComponents/mainContainer';
+import { Button } from '../styledComponents/button';
 
 import { HighlightedContainer } from '../styledComponents/hightlightedContainer';
 
 import { Boxtitle } from '../styledComponents/boxtitle';
 import { VoteContainer } from '../styledComponents/voteContainer';
+import { putVotingResultsToUserConfig } from '../utils/putVotingResultsToUserConfig';
 
 export default function Voting() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const { userData, setUserData } = useMongoDBUserData([]);
+
+  useEffect(() => {
+    if (userData) {
+    }
+  }, [userData]);
+
+  const token = localStorage.getItem('token');
+  const decodedToken = jwtDecode(token);
+  const user = userData.find((user) => user.id === decodedToken.id);
+
   const [pointArray, setPointArray] = useState([
-    1, 2, 3, 4, 5, 6, 7, 8, 10, 12,
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
   ]);
 
   const [disabledPoints, setDisabledPoints] = useState([]);
 
   const [selectedPoints, setSelectedPoints] = useState({});
+
+  function submitVotes() {
+    console.log(selectedPoints);
+
+    const id = decodedToken;
+    console.log(id);
+    const voting = selectedPoints;
+    putVotingResultsToUserConfig(id, voting);
+  }
 
   const pushNumbers = (e, countryName) => {
     console.log(countryName, e.target.value);
@@ -53,7 +82,7 @@ export default function Voting() {
 
   return (
     <div>
-      <Title>My Voting</Title>
+      <Title>Personal Vote</Title>
 
       <MainContainer>
         <hr />
@@ -75,7 +104,10 @@ export default function Voting() {
                       </h3>
                       <p>{country.participant}</p>
                     </div>
-                    <select onChange={(e) => pushNumbers(e, country.name)}>
+                    <select
+                      defaultValue="0"
+                      onChange={(e) => pushNumbers(e, country.name)}
+                    >
                       {pointArray.map((point, index) => (
                         <option
                           key={index}
@@ -91,10 +123,21 @@ export default function Voting() {
                 <i>
                   <p className="song">"{country.song}"</p>
                 </i>
+                {/* <iframe
+                  style={{ borderRadius: '12px' }}
+                  src="https://open.spotify.com/embed/track/0uHrMbMv3c78398pIANDqR?utm_source=generator&theme=0"
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allowFullScreen=""
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                ></iframe> */}
                 <hr />
               </div>
             </VoteContainer>
           ))}
+        <Button onClick={submitVotes}>Submit</Button>
       </MainContainer>
     </div>
   );

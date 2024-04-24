@@ -1,12 +1,12 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const express = require("express");
+const express = require('express');
 const app = express();
 const port = process.env.PORT;
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose');
+const cors = require('cors');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // Middleware
 app.use(express.json());
@@ -14,7 +14,7 @@ app.use(cors());
 
 // Connect to MongoDB
 const connectionString = process.env.MONGO_DB_CLIENT;
-console.log("Connecting to MongoDB...");
+console.log('Connecting to MongoDB...');
 
 mongoose
   .connect(connectionString, {
@@ -22,97 +22,101 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("MongoDB connected successfully!");
+    console.log('MongoDB connected successfully!');
   })
   .catch((err) => {
-    console.error("Error connecting to MongoDB", err);
+    console.error('Error connecting to MongoDB', err);
   });
 // Schemas ----------------------------------------------
 // Schema for Post
 
-const Post = require("./models/postSchema");
+const Post = require('./models/postSchema');
 
 // Schema for User
 
-const User = require("./models/userSchema");
+const User = require('./models/userSchema');
 
 // Routes ----------------------------------------------
 // POST Route for Post
 
-const postRoute = require("./routes/postRoute"); // Pfad zur Post-Route
-app.use("/api/post", postRoute);
+const postRoute = require('./routes/postRoute'); // Pfad zur Post-Route
+app.use('/api/post', postRoute);
 
 // POST Route for Register
 // ...down below because of (Multipart Form Data/Multer)
 
 // GET Route for Posts aus Pool
-const getPoolRoute = require("./routes/getPoolRoute"); // Pfad zur Get-Route
-app.use("/api/getPool", getPoolRoute);
+const getPoolRoute = require('./routes/getPoolRoute'); // Pfad zur Get-Route
+app.use('/api/getPool', getPoolRoute);
 
 // POST Route for Posts einer bestimmten User ID
-const getPostsFromUserIdRoute = require("./routes/getPostsFromUserIdRoute"); // Pfad zur POST-Route
-app.use("/api/getPostsFromUserId", getPostsFromUserIdRoute);
+const getPostsFromUserIdRoute = require('./routes/getPostsFromUserIdRoute'); // Pfad zur POST-Route
+app.use('/api/getPostsFromUserId', getPostsFromUserIdRoute);
 
 // POST Route for Login
-const userController = require("./controller/userController");
-app.post("/api/login", userController.login);
+const userController = require('./controller/userController');
+app.post('/api/login', userController.login);
 
 // GET Route for FriendIDs aus Userdata
-const getFriendsRoute = require("./routes/getFriendsRoute"); // Pfad zur Get-Route
-app.use("/api/getFriends", getFriendsRoute);
+const getFriendsRoute = require('./routes/getFriendsRoute'); // Pfad zur Get-Route
+app.use('/api/getFriends', getFriendsRoute);
 
 // PUT Route um FriendIDs in Userdata zu speichern
-const putFriendsRoute = require("./routes/putFriendsRoute"); // Pfad zur Put-Route
-app.use("/api/putFriends", putFriendsRoute);
+const putFriendsRoute = require('./routes/putFriendsRoute'); // Pfad zur Put-Route
+app.use('/api/putFriends', putFriendsRoute);
 
 // PUT Route um PostIDs in Userdata zu speichern
-const putPostIdToUserRoute = require("./routes/putPostIdToUserRoute"); // Pfad zur Put-Route
-app.use("/api/putPostIdToUser", putPostIdToUserRoute);
+const putPostIdToUserRoute = require('./routes/putPostIdToUserRoute'); // Pfad zur Put-Route
+app.use('/api/putPostIdToUser', putPostIdToUserRoute);
+
+// PUT Route um Voting in Userdata zu speichern
+const putVotingResultsToUser = require('./routes/putVotingResultsToUser'); // Pfad zur Put-Route
+app.use('/api/putVotingResultsToUser', putVotingResultsToUser);
 
 // PUT Route um read auf true in friendIds + recievedPostsIds in usercollection zu setzen
-const updateReadNotificationRoute = require("./routes/updateReadNotificationRoute"); // Pfad zur Put-Route
-app.use("/api/updateReadNotification", updateReadNotificationRoute);
+const updateReadNotificationRoute = require('./routes/updateReadNotificationRoute'); // Pfad zur Put-Route
+app.use('/api/updateReadNotification', updateReadNotificationRoute);
 
 // POST Route um übereinstimmende Posts mit RecievedPostIDs aus Userdata zu finden
-const getMatchingPostsMessagesRoute = require("./routes/getMatchingPostsMessagesRoute"); // Pfad zur Post-Route
-app.use("/api/getMatchingPostsMessages", getMatchingPostsMessagesRoute);
+const getMatchingPostsMessagesRoute = require('./routes/getMatchingPostsMessagesRoute'); // Pfad zur Post-Route
+app.use('/api/getMatchingPostsMessages', getMatchingPostsMessagesRoute);
 
 // GET Post ID out from URL and find Post in Database
-const getPostWithIdRoute = require("./routes/getPostWithIdRoute"); // Pfad zur Get-Route
-app.use("/api/getPostWithId", getPostWithIdRoute);
+const getPostWithIdRoute = require('./routes/getPostWithIdRoute'); // Pfad zur Get-Route
+app.use('/api/getPostWithId', getPostWithIdRoute);
 
 // DELETE Route um FriendIDs in Userdata zu löschen
-const deleteFriendsRoute = require("./routes/deleteFriendsRoute"); // Pfad zur Delete-Route
-app.use("/api/deleteFriends", deleteFriendsRoute);
+const deleteFriendsRoute = require('./routes/deleteFriendsRoute'); // Pfad zur Delete-Route
+app.use('/api/deleteFriends', deleteFriendsRoute);
 
 // GET Route um MessagesCount aus Userdata zu laden
-const getMessagesCountRoute = require("./routes/getMessagesCountRoute"); // Pfad zur Get-Route
-app.use("/api/getMessagesCount", getMessagesCountRoute);
+const getMessagesCountRoute = require('./routes/getMessagesCountRoute'); // Pfad zur Get-Route
+app.use('/api/getMessagesCount', getMessagesCountRoute);
 
 // POST Route für den Reset Password Prozess (Email + Code)
-const resetPasswordRoute = require("./routes/resetPasswordRoute"); // Pfad zur Post-Route
-app.use("/api/auth/reset/newpassword", resetPasswordRoute);
+const resetPasswordRoute = require('./routes/resetPasswordRoute'); // Pfad zur Post-Route
+app.use('/api/auth/reset/newpassword', resetPasswordRoute);
 
 // PUT Route für den Reset Password Prozess (New Password)
-const newPasswordRoute = require("./routes/newPasswordRoute"); // Pfad zur PUT-Route
-app.use("/api/auth/reset/setnewpassword", newPasswordRoute);
+const newPasswordRoute = require('./routes/newPasswordRoute'); // Pfad zur PUT-Route
+app.use('/api/auth/reset/setnewpassword', newPasswordRoute);
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 });
 
-app.get("/health-check", (req, res) => {
+app.get('/health-check', (req, res) => {
   res.status(200).send({ message: "I'm alive! Greetings from the backend!" });
 });
 
 //--------------------------------------------------------------------------------
 // Middleware - Multipart Form Data ----------------------------------------------
-const path = require("path");
-const multer = require("multer");
+const path = require('path');
+const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -124,31 +128,31 @@ const avatar = multer({ storage });
 // Middleware für multipart formdata
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Fügen Sie diese Zeile hier hinzu
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Fügen Sie diese Zeile hier hinzu
 
 // POST Route for Register ------------------------------------------------------
 
-app.post("/api/register", avatar.single("avatar"), async (req, res) => {
+app.post('/api/register', avatar.single('avatar'), async (req, res) => {
   try {
     const { id, avatar, email1, username, password1, friendcode } = req.body;
 
     if (!id || !email1 || !username || !password1) {
-      return res.status(400).send({ message: "Required field is missing!" });
+      return res.status(400).send({ message: 'Required field is missing!' });
     }
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(409).send({ message: "Username already taken!" });
+      return res.status(409).send({ message: 'Username already taken!' });
     }
 
     const existingEmail = await User.findOne({ email: email1 });
     if (existingEmail) {
-      return res.status(422).send({ message: "Email already taken!" });
+      return res.status(422).send({ message: 'Email already taken!' });
     }
 
     let avatarUrl = null;
     if (req.file) {
-      avatarUrl = `${req.protocol}://${req.get("host")}/uploads/${
+      avatarUrl = `${req.protocol}://${req.get('host')}/uploads/${
         req.file.filename
       }`;
     }
@@ -169,16 +173,16 @@ app.post("/api/register", avatar.single("avatar"), async (req, res) => {
     console.log(userToAdd);
 
     const userCreated = await User.create(userToAdd);
-    console.log("userCreated");
-    res.status(201).send({ message: "User created successfully!" });
+    console.log('userCreated');
+    res.status(201).send({ message: 'User created successfully!' });
   } catch (error) {
-    console.error("Error while creating User!", error);
-    res.status(500).send({ message: "Error while creating User!" });
+    console.error('Error while creating User!', error);
+    res.status(500).send({ message: 'Error while creating User!' });
   }
 });
 
 // PUT Route for Userdata Update ------------------------------------------------------
-app.put("/api/updateUser", avatar.single("newAvatar"), async (req, res) => {
+app.put('/api/updateUser', avatar.single('newAvatar'), async (req, res) => {
   try {
     const newUsername = req.body.newUsername;
     const newPassword = req.body.newPassword;
@@ -188,11 +192,10 @@ app.put("/api/updateUser", avatar.single("newAvatar"), async (req, res) => {
 
     let newAvatarUrl = null;
     if (req.file) {
-      newAvatarUrl = `${req.protocol}://${req.get("host")}/uploads/${
+      newAvatarUrl = `${req.protocol}://${req.get('host')}/uploads/${
         req.file.filename
       }`;
     }
-    
 
     const newHashedPassword = await bcrypt.hash(newPassword, 10);
     console.log(newHashedPassword);
@@ -201,15 +204,21 @@ app.put("/api/updateUser", avatar.single("newAvatar"), async (req, res) => {
 
     if (newUsername) {
       if (newUsername.length < 3 || newUsername.length > 20) {
-        return res.status(401).send({ message: "Username must be between 3 and 20 characters!" });
+        return res
+          .status(401)
+          .send({ message: 'Username must be between 3 and 20 characters!' });
       }
       updateObj.username = newUsername;
     }
 
     if (newPassword) {
-      const passwordPattern = new RegExp("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}");
+      const passwordPattern = new RegExp(
+        '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
+      );
       if (!passwordPattern.test(newPassword)) {
-        return res.status(400).send({ message: "Password does not meet the requirements!" });
+        return res
+          .status(400)
+          .send({ message: 'Password does not meet the requirements!' });
       }
       const newHashedPassword = await bcrypt.hash(newPassword, 10);
       updateObj.hashedPassword = newHashedPassword;
@@ -219,46 +228,43 @@ app.put("/api/updateUser", avatar.single("newAvatar"), async (req, res) => {
       updateObj.avatarUrl = newAvatarUrl;
     }
 
-    if (theme && theme !== "0") {
-      updateObj["userSettings.0.theme"] = theme;
+    if (theme && theme !== '0') {
+      updateObj['userSettings.0.theme'] = theme;
     }
 
     if (notificationTime) {
-      updateObj["userSettings.1.notificationTime"] = notificationTime;
+      updateObj['userSettings.1.notificationTime'] = notificationTime;
     }
 
     const existingUser = await User.findOne({ username: newUsername });
-  if (existingUser) {
-    return res.status(409).send({ message: "Username already taken!" });
-  }
+    if (existingUser) {
+      return res.status(409).send({ message: 'Username already taken!' });
+    }
 
     const updatedUser = await User.findOneAndUpdate({ id: userId }, updateObj, {
       new: true,
     });
 
     if (!updatedUser) {
-      return res.status(404).send({ message: "User not found!" });
+      return res.status(404).send({ message: 'User not found!' });
     }
-
-    
-
 
     res
       .status(201)
-      .send({ message: "User updated successfully!", user: updatedUser });
+      .send({ message: 'User updated successfully!', user: updatedUser });
   } catch (error) {
-    console.error("Error updating user", error);
-    res.status(500).send({ message: "Error updating user" });
+    console.error('Error updating user', error);
+    res.status(500).send({ message: 'Error updating user' });
   }
 });
 
 // GET Route for Userdata ------------------------------------------------------
-app.get("/api/getuserdata", async (req, res) => {
+app.get('/api/getuserdata', async (req, res) => {
   try {
     const getUserData = await User.find({});
-    console.log("Userdata loaded!");
+    console.log('Userdata loaded!');
     res.status(200).send({ message: getUserData, data: getUserData });
   } catch {
-    res.status(500).send({ message: "Error while loading Userdata!" });
+    res.status(500).send({ message: 'Error while loading Userdata!' });
   }
 });
