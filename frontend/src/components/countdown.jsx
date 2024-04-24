@@ -31,9 +31,9 @@ export default function Countdown() {
 
   const timerComponents = [];
 
-  Object.keys(timeLeft).forEach((interval) => {
+  Object.keys(timeLeft).forEach((interval, index) => {
     timerComponents.push(
-      <span>
+      <span key={index}>
         {timeLeft[interval]} {interval}{' '}
       </span>
     );
