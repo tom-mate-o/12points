@@ -262,3 +262,7 @@ hr {
 a {
   text-decoration: none;
 }
+
+.toggleMore.open {
+  display: none;
+}

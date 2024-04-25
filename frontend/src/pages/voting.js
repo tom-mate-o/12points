@@ -54,6 +54,10 @@ export default function Voting() {
     putVotingResultsToUserConfig(id, voting);
   }
 
+  const toggleMoreFunction = function (element) {
+    element.classList.toggle('open');
+  };
+
   const pushNumbers = (e, countryName) => {
     console.log(countryName, e.target.value);
     const point = Number(e.target.value);
@@ -123,16 +127,30 @@ export default function Voting() {
                 <i>
                   <p className="song">"{country.song}"</p>
                 </i>
-                <iframe
-                  style={{ borderRadius: '12px' }}
-                  src={country.spotify}
-                  width="100%"
-                  height="152"
-                  frameBorder="0"
-                  allowFullScreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
+                <button
+                  onClick={(e) => {
+                    const toggleMoreDiv = e.target.nextSibling;
+                    toggleMoreFunction(toggleMoreDiv);
+                  }}
+                >
+                  open more
+                </button>
+                <div className="toggleMore open">
+                  <iframe
+                    style={{ borderRadius: '12px' }}
+                    src={country.spotify}
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allowFullScreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
+                  <a href={country.url} target="_blank">
+                    <button>Artist Info</button>
+                  </a>
+                </div>
+
                 <hr />
               </div>
             </VoteContainer>
