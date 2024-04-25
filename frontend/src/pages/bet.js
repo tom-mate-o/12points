@@ -18,9 +18,64 @@ export default function Bet() {
   }, []);
 
   const [rankArray, setRankArray] = useState([
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26,
+    '-',
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
   ]);
+
+  const [disabledPlaces, setDisabledPlaces] = useState([]);
+
+  const [selectedPlaces, setSelectedPlaces] = useState({});
+
+  function submitVotes() {
+    console.log(selectedPlaces);
+  }
+
+  const pushPlaces = (e, countryName) => {
+    console.log(countryName, e.target.value);
+    const place = Number(e.target.value);
+
+    setDisabledPlaces((prevPlaces) => {
+      const previousPlace = selectedPlaces[countryName];
+      const newPlaces = previousPlace
+        ? prevPlaces.filter((p) => p !== previousPlace)
+        : prevPlaces;
+
+      if (!newPlaces.includes(place)) {
+        newPlaces.push(place);
+      }
+      return newPlaces;
+    });
+
+    setSelectedPlaces((prevSelectedPlaces) => ({
+      ...prevSelectedPlaces,
+      [countryName]: place,
+    }));
+  };
 
   return (
     <div>
@@ -48,10 +103,14 @@ export default function Bet() {
                   </div>
                   <select
                     defaultValue=""
-                    onChange={(e) => console.log(e.target.value)}
+                    onChange={(e) => pushPlaces(e, country.name)}
                   >
                     {rankArray.map((rank, index) => (
-                      <option key={index} value={rank}>
+                      <option
+                        key={index}
+                        value={rank}
+                        disabled={disabledPlaces.includes(rank)}
+                      >
                         {rank}
                       </option>
                     ))}
@@ -81,7 +140,7 @@ export default function Bet() {
               </div>
             </VoteContainer>
           ))}
-        <button>Submit</button>
+        <button onClick={submitVotes}>Submit</button>
       </MainContainer>
     </div>
   );
