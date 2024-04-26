@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import { useLocation } from 'react-router-dom';
 import countries from '../countries.json';
+
+//Costum Hooks
+import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
+
+//Utils
+import { putRankingBetResultsToUserConfig } from '../utils/putRankingBetResultsToUserConfig';
 
 //Styled Components
 import { Title } from '../styledComponents/title';
@@ -16,6 +23,16 @@ export default function Bet() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const { userData, setUserData } = useMongoDBUserData([]);
+
+  useEffect(() => {
+    if (userData) {
+    }
+  }, [userData]);
+
+  const token = localStorage.getItem('token');
+  const decodedToken = jwtDecode(token);
 
   const [rankArray, setRankArray] = useState([
     '-',
@@ -53,6 +70,10 @@ export default function Bet() {
 
   function submitVotes() {
     console.log(selectedPlaces);
+
+    const id = decodedToken;
+    const bet = selectedPlaces;
+    putRankingBetResultsToUserConfig(id, bet);
   }
 
   const toggleMoreFunction = function (element) {

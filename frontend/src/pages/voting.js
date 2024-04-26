@@ -42,7 +42,6 @@ export default function Voting() {
     console.log(selectedPoints);
 
     const id = decodedToken;
-    console.log(id);
     const voting = selectedPoints;
     putVotingResultsToUserConfig(id, voting);
   }

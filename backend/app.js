@@ -73,6 +73,10 @@ app.use('/api/putPostIdToUser', putPostIdToUserRoute);
 const putVotingResultsToUser = require('./routes/putVotingResultsToUser'); // Pfad zur Put-Route
 app.use('/api/putVotingResultsToUser', putVotingResultsToUser);
 
+// PUT Route um Ranking Bet in Userdata zu speichern
+const putRankingBetResultsToUser = require('./routes/putRankingBetResultsToUser'); // Pfad zur Put-Route
+app.use('/api/putRankingBetResultsToUser', putRankingBetResultsToUser);
+
 // PUT Route um read auf true in friendIds + recievedPostsIds in usercollection zu setzen
 const updateReadNotificationRoute = require('./routes/updateReadNotificationRoute'); // Pfad zur Put-Route
 app.use('/api/updateReadNotification', updateReadNotificationRoute);
