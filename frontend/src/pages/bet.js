@@ -55,6 +55,10 @@ export default function Bet() {
     console.log(selectedPlaces);
   }
 
+  const toggleMoreFunction = function (element) {
+    element.classList.toggle('open');
+  };
+
   const pushPlaces = (e, countryName) => {
     console.log(countryName, e.target.value);
     const place = Number(e.target.value);
@@ -119,7 +123,14 @@ export default function Bet() {
                 <i>
                   <p className="song">"{country.song}"</p>
                 </i>
-                <button>open more</button>
+                <button
+                  onClick={(e) => {
+                    const toggleMoreDiv = e.target.nextSibling;
+                    toggleMoreFunction(toggleMoreDiv);
+                  }}
+                >
+                  open more
+                </button>
                 <div className="toggleMore open">
                   <iframe
                     style={{ borderRadius: '12px' }}
