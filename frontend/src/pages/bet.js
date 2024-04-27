@@ -20,20 +20,7 @@ import { Boxtitle } from '../styledComponents/boxtitle';
 import { VoteContainer } from '../styledComponents/voteContainer';
 
 export default function Bet() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const { userData, setUserData } = useMongoDBUserData([]);
-
-  useEffect(() => {
-    if (userData) {
-    }
-  }, [userData]);
-
-  const token = localStorage.getItem('token');
-  const decodedToken = jwtDecode(token);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [rankArray, setRankArray] = useState([
     '-',
     1,
@@ -63,10 +50,39 @@ export default function Bet() {
     25,
     26,
   ]);
-
   const [disabledPlaces, setDisabledPlaces] = useState([]);
 
   const [selectedPlaces, setSelectedPlaces] = useState({});
+  const [userSelectedPlaces, setUserSelectedPlaces] = useState({});
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const { userData, setUserData } = useMongoDBUserData([]);
+
+  useEffect(() => {
+    if (userData) {
+      setIsLoading(false);
+    }
+  }, [userData]);
+
+  const token = localStorage.getItem('token');
+  const decodedToken = jwtDecode(token);
+
+  const user = userData.find((user) => user.id === decodedToken.id);
+  const userBets = user ? user.bet : {};
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (userBets) {
+        setUserSelectedPlaces(userBets);
+        console.log(userBets);
+      }
+    };
+
+    fetchUser();
+  }, [userData]);
 
   function submitVotes() {
     console.log(selectedPlaces);
@@ -126,8 +142,11 @@ export default function Bet() {
                     </h3>
                     <p>{country.participant}</p>
                   </div>
+                  {userSelectedPlaces[country.name] && (
+                    <span>{userSelectedPlaces[country.name]}</span>
+                  )}
                   <select
-                    defaultValue=""
+                    defaultValue={'-'}
                     onChange={(e) => pushPlaces(e, country.name)}
                   >
                     {rankArray.map((rank, index) => (
