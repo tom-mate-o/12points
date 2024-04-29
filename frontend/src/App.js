@@ -16,6 +16,8 @@ import Register from './pages/register';
 
 import BetSuccessful from './pages/betSuccessful';
 import VoteSuccessful from './pages/voteSuccessful';
+import FriendVoting from './pages/friendVoting';
+import FriendBet from './pages/friendBet';
 
 import ResetPassword from './pages/resetpassword';
 import NotFoundPage from './pages/notFoundPage';
@@ -178,6 +180,34 @@ function App() {
               element={
                 loggedIn ? (
                   <VoteSuccessful />
+                ) : (
+                  <Login
+                    handleLogin={handleLogin}
+                    loggedIn={loggedIn}
+                    replace
+                  />
+                )
+              }
+            />
+            <Route
+              path="/friendvoting/:userId"
+              element={
+                loggedIn ? (
+                  <FriendVoting />
+                ) : (
+                  <Login
+                    handleLogin={handleLogin}
+                    loggedIn={loggedIn}
+                    replace
+                  />
+                )
+              }
+            />
+            <Route
+              path="/friendbet/:userId"
+              element={
+                loggedIn ? (
+                  <FriendBet />
                 ) : (
                   <Login
                     handleLogin={handleLogin}

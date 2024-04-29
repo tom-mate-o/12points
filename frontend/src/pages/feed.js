@@ -75,20 +75,24 @@ export default function Feed() {
             </div>
             <div className="buttonContainer">
               {user.voting && Object.keys(user.voting).length > 0 ? (
-                <button>
-                  <TiHeartFullOutline />
-                </button>
+                <NavLink to={`/friendvoting/${user.id}`}>
+                  <button>
+                    <TiHeartFullOutline />
+                  </button>
+                </NavLink>
               ) : (
                 ''
               )}
 
-              <button>
-                {user.bet && Object.keys(user.bet).length > 0 ? (
-                  <FaRankingStar />
-                ) : (
-                  ''
-                )}
-              </button>
+              {user.bet && Object.keys(user.bet).length > 0 ? (
+                <NavLink to={`/friendbet/${user.id}`}>
+                  <button>
+                    <FaRankingStar />
+                  </button>
+                </NavLink>
+              ) : (
+                ''
+              )}
             </div>
           </FriendListGrid>
         ))}
