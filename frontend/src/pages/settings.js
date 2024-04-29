@@ -1,30 +1,30 @@
 //settings.js
 
-import React from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
-import { NavLink } from "react-router-dom";
-import { TbDoorExit } from "react-icons/tb";
-import { jwtDecode } from "jwt-decode";
-import showNotifications from "../components/showNotifications/showNotificationsToastify";
-import updateUserInDatabase from "../utils/updateUserInDatabase";
+import React from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
+import { NavLink } from 'react-router-dom';
+import { TbDoorExit } from 'react-icons/tb';
+import { jwtDecode } from 'jwt-decode';
+import showNotifications from '../components/showNotifications/showNotificationsToastify';
+import updateUserInDatabase from '../utils/updateUserInDatabase';
 
 //Styled Components
-import { Title } from "../styledComponents/title";
-import { SubTitle } from "../styledComponents/subTitle";
-import { MainContainer } from "../styledComponents/mainContainer";
-import { ProfileInfoGrid } from "../styledComponents/profileInfoGrid";
+import { Title } from '../styledComponents/title';
+import { SubTitle } from '../styledComponents/subTitle';
+import { MainContainer } from '../styledComponents/mainContainer';
+import { ProfileInfoGrid } from '../styledComponents/profileInfoGrid';
 
-import { InputField } from "../styledComponents/inputField";
-import { Boxtitle } from "../styledComponents/boxtitle";
-import { WideButton } from "../styledComponents/wideButton";
-import { birbImages } from "../assets/birbs/birbsimgs";
-import { Button } from "../styledComponents/button";
+import { InputField } from '../styledComponents/inputField';
+import { Boxtitle } from '../styledComponents/boxtitle';
+import { WideButton } from '../styledComponents/wideButton';
+import { birbImages } from '../assets/birbs/birbsimgs';
+import { Button } from '../styledComponents/button';
 
 //Costum Hooks
-import useMongoDBUserData from "../costumHooks/useMongoDBUserData";
+import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
 
-import { Select, MenuItem } from "@mui/material";
+import { Select, MenuItem } from '@mui/material';
 
 export default function Settings({ handleLogout }) {
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Settings({ handleLogout }) {
     }
   }, [userData]);
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   const decodedToken = jwtDecode(token);
 
   const user = userData.find((user) => user.id === decodedToken.id);
@@ -62,17 +62,17 @@ export default function Settings({ handleLogout }) {
     event.preventDefault();
 
     if (password1.current.value !== password2.current.value) {
-      showNotifications("Passwords do not match!", "error");
+      showNotifications('Passwords do not match!', 'error');
       return;
     }
 
     const formData = new FormData();
-    formData.append("newAvatar", newAvatarUrl.current.files[0]);
-    formData.append("newUsername", newUsername.current.value);
-    formData.append("newPassword", password1.current.value);
-    formData.append("theme", value);
-    formData.append("notificationTime", notificationTime.current.value);
-    formData.append("userId", decodedToken.id);
+    formData.append('newAvatar', newAvatarUrl.current.files[0]);
+    formData.append('newUsername', newUsername.current.value);
+    formData.append('newPassword', password1.current.value);
+    formData.append('theme', value);
+    formData.append('notificationTime', notificationTime.current.value);
+    formData.append('userId', decodedToken.id);
 
     updateUserInDatabase(formData);
   }
@@ -91,10 +91,10 @@ export default function Settings({ handleLogout }) {
 
       <ProfileInfoGrid>
         <div className="avatar">
-          {" "}
+          {' '}
           <img
             className="writeImg"
-            src={avatarUrl ? avatarUrl : birbImages.noavatar}
+            src={`${avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
             alt={username}
             onError={(e) => {
               e.target.onerror = null;
@@ -104,7 +104,7 @@ export default function Settings({ handleLogout }) {
         </div>
         <div className="username">{username}</div>
         <input
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           type="file"
           id="file"
           name="avatar"
@@ -175,20 +175,20 @@ export default function Settings({ handleLogout }) {
           value={value}
           onChange={(event) => setValue(event.target.value)}
           sx={{
-            marginTop: "15px",
+            marginTop: '15px',
             height: 50,
-            width: "100%",
-            fontFamily: "var(--fontFamily)",
-            fontWeight: "800",
-            borderRadius: "15px",
-            backgroundColor: "var(--textOnButton)",
-            color: "var(--textOnBright)",
+            width: '100%',
+            fontFamily: 'var(--fontFamily)',
+            fontWeight: '800',
+            borderRadius: '15px',
+            backgroundColor: 'var(--textOnButton)',
+            color: 'var(--textOnBright)',
           }}
           MenuProps={{
             PaperProps: {
               sx: {
-                backgroundColor: "var(--textOnButton)",
-                borderRadius: "15px",
+                backgroundColor: 'var(--textOnButton)',
+                borderRadius: '15px',
               },
             },
           }}
@@ -196,10 +196,10 @@ export default function Settings({ handleLogout }) {
           <MenuItem disabled value={null}>
             Choose a Theme
           </MenuItem>
-          <MenuItem value={"sunriseSunset-theme"}>
+          <MenuItem value={'sunriseSunset-theme'}>
             Sunrise/Sunset Theme
           </MenuItem>
-          <MenuItem value={"dracula-theme"}>Dracula Theme</MenuItem>
+          <MenuItem value={'dracula-theme'}>Dracula Theme</MenuItem>
         </Select>
       </MainContainer>
 

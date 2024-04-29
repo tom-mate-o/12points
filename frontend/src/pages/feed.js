@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Countdown, { contdown } from '../components/countdown';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { FaRankingStar } from 'react-icons/fa6';
+import Avatar from 'boring-avatars';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -29,6 +30,14 @@ export default function Feed() {
   }, []);
 
   const { userData, setUserData } = useMongoDBUserData([]);
+  const colors = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
+  const getRandomColors = () => {
+    const colors = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
+    return colors
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 5)
+      .join(',');
+  };
 
   if (!userData || userData.length === 0) {
     return (
@@ -48,21 +57,19 @@ export default function Feed() {
   return (
     <div>
       <Title>Feed</Title>
-      <InfoContainer>
-        <div className="bulbIcon">
-          <HiOutlineLightBulb />
-        </div>
-        <div>
-          Welcome to Twelve Points <br />
-          Have a look how your friends voted
-        </div>
-      </InfoContainer>
+
       <MainContainer>
         <Boxtitle>Your Friends</Boxtitle>
 
         {userData.map((user) => (
           <FriendListGrid key={user.id}>
-            <div className="avatar">A</div>
+            <div className="avatar">
+              {' '}
+              <img
+                src={`${user.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
+                alt={user.name}
+              />
+            </div>
             <div className="name">
               <p>{user.username}</p>
             </div>
@@ -86,19 +93,6 @@ export default function Feed() {
           </FriendListGrid>
         ))}
       </MainContainer>
-
-      <InfoContainer>
-        <div className="bulbIcon">
-          <HiOutlineLightBulb />
-        </div>
-        <div>
-          Give your own points for your favourties
-          <br />
-          and place your bet for the finals
-          <br />
-          <Countdown />
-        </div>
-      </InfoContainer>
 
       <div className="buttonContainer">
         <NavLink to="/voting">
