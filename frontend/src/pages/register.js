@@ -1,17 +1,17 @@
-import React, { useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import uuid4 from "uuid4";
+import React, { useEffect, useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import uuid4 from 'uuid4';
 import ShortUniqueId from 'short-unique-id';
-import showNotifications from "../components/showNotifications/showNotificationsToastify";
-import registerUserToDatabase from "../utils/registerUserToDatabase";
+import showNotifications from '../components/showNotifications/showNotificationsToastify';
+import registerUserToDatabase from '../utils/registerUserToDatabase';
 
 //Styled Components
-import { Title } from "../styledComponents/title";
-import { MainContainer } from "../styledComponents/mainContainer";
-import { Boxtitle } from "../styledComponents/boxtitle";
-import { InputField } from "../styledComponents/inputField";
-import { Button } from "../styledComponents/button";
-import { SubmitButton } from "../styledComponents/submitButton";
+import { Title } from '../styledComponents/title';
+import { MainContainer } from '../styledComponents/mainContainer';
+import { Boxtitle } from '../styledComponents/boxtitle';
+import { InputField } from '../styledComponents/inputField';
+import { Button } from '../styledComponents/button';
+import { SubmitButton } from '../styledComponents/submitButton';
 
 export default function Register() {
   useEffect(() => {
@@ -38,38 +38,37 @@ export default function Register() {
     const friendcodeGen = uid.rnd();
     const friendcodeRaw = friendcodeGen.toUpperCase();
     const friendcode = friendcodeRaw;
-    
+    const username = form.username.value;
+    const avatarUrl = `https://source.boringavatars.com/beam/40/${username}`;
+    console.log(avatarUrl);
 
     let file;
-    if (form.avatar.files.length > 0) {
-      file = form.avatar.files[0];
-      formData.append("avatar", file);
-    }
 
-    formData.append("id", id);
-    formData.append("email1", form.email1.value);
-    formData.append("email2", form.email2.value);
-    formData.append("username", form.username.value);
-    formData.append("password1", form.password1.value);
-    formData.append("password2", form.password2.value);
-    formData.append("friendcode", friendcode);
+    formData.append('id', id);
+    formData.append('avatarUrl', avatarUrl);
+    formData.append('email1', form.email1.value);
+    formData.append('email2', form.email2.value);
+    formData.append('username', form.username.value);
+    formData.append('password1', form.password1.value);
+    formData.append('password2', form.password2.value);
+    formData.append('friendcode', friendcode);
 
     if (form.password1.value !== form.password2.value) {
-      showNotifications("Passwords do not match!", "error");
+      showNotifications('Passwords do not match!', 'error');
       return;
     }
 
     if (form.email1.value !== form.email2.value) {
-      showNotifications("Emails do not match!", "error");
+      showNotifications('Emails do not match!', 'error');
       return;
     }
 
     async function navigateToLogin() {
       const result = await registerUserToDatabase(formData);
       if (result) {
-        navigate("/login");
+        navigate('/login');
       } else {
-        showNotifications("Registration failed!", "error");
+        showNotifications('Registration failed!', 'error');
       }
     }
 
@@ -83,7 +82,7 @@ export default function Register() {
         <form ref={formRef} onSubmit={(e) => registerUser(e)}>
           <Boxtitle>Avatar</Boxtitle>
           <input
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             type="file"
             id="file"
             name="avatar"

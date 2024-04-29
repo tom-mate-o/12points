@@ -110,13 +110,7 @@ export default function Settings({ handleLogout }) {
           name="avatar"
           ref={newAvatarUrl}
         />
-        <label htmlFor="file">
-          <Button className="button">
-            change your
-            <br />
-            Profile Picture
-          </Button>
-        </label>
+        <label htmlFor="file"></label>
       </ProfileInfoGrid>
 
       <SubTitle>Username</SubTitle>
