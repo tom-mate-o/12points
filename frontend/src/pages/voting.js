@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import countries from '../countries.json';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -16,6 +18,12 @@ import { Button } from '../styledComponents/button';
 import { VoteContainer } from '../styledComponents/voteContainer';
 
 export default function Voting() {
+  const [disabledPoints, setDisabledPoints] = useState([]);
+
+  const [selectedPoints, setSelectedPoints] = useState({});
+  const [userSelectedPoints, setUserSelectedPoints] = useState({});
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -34,16 +42,32 @@ export default function Voting() {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
   ]);
 
-  const [disabledPoints, setDisabledPoints] = useState([]);
+  const user = userData.find((user) => user.id === decodedToken.id);
+  const userVotes = user ? user.voting : {};
 
-  const [selectedPoints, setSelectedPoints] = useState({});
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (userVotes) {
+        setUserSelectedPoints(userVotes);
+        console.log(userVotes);
+      }
+    };
 
-  function submitVotes() {
-    console.log(selectedPoints);
+    fetchUser();
+  }, [userData]);
 
+  async function submitVotes() {
     const id = decodedToken;
     const voting = selectedPoints;
-    putVotingResultsToUserConfig(id, voting);
+    const success = await putVotingResultsToUserConfig(id, voting);
+
+    console.log(selectedPoints);
+
+    if (success) {
+      console.log('Voting submitted');
+      navigate('/votesuccessful', { state: selectedPoints });
+      console.log('success');
+    }
   }
 
   const toggleMoreFunction = function (element) {
@@ -84,6 +108,7 @@ export default function Voting() {
         <hr />
         {countries
           .filter((country) => country.final)
+          .sort((a, b) => a.startnumber - b.startnumber)
           .map((country) => (
             <VoteContainer key={country.code}>
               <div className="artistContainer">
@@ -100,6 +125,9 @@ export default function Voting() {
                     </h3>
                     <p>{country.participant}</p>
                   </div>
+                  {userSelectedPoints[country.name] && (
+                    <span>{userSelectedPoints[country.name] + ' Points'}</span>
+                  )}
                   <select
                     defaultValue="0"
                     onChange={(e) => pushNumbers(e, country.name)}

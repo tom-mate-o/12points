@@ -138,7 +138,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Fügen 
 
 app.post('/api/register', avatar.single('avatar'), async (req, res) => {
   try {
-    const { id, avatar, email1, username, password1, friendcode } = req.body;
+    const { id, avatarUrl, email1, username, password1, friendcode } = req.body;
 
     if (!id || !email1 || !username || !password1) {
       return res.status(400).send({ message: 'Required field is missing!' });
@@ -154,12 +154,6 @@ app.post('/api/register', avatar.single('avatar'), async (req, res) => {
       return res.status(422).send({ message: 'Email already taken!' });
     }
 
-    let avatarUrl = null;
-    if (req.file) {
-      avatarUrl = `${req.protocol}://${req.get('host')}/uploads/${
-        req.file.filename
-      }`;
-    }
     console.log(avatarUrl);
 
     const hashedPassword = await bcrypt.hash(password1, 10);
@@ -194,13 +188,6 @@ app.put('/api/updateUser', avatar.single('newAvatar'), async (req, res) => {
     const notificationTime = req.body.notificationTime;
     const userId = req.body.userId;
 
-    let newAvatarUrl = null;
-    if (req.file) {
-      newAvatarUrl = `${req.protocol}://${req.get('host')}/uploads/${
-        req.file.filename
-      }`;
-    }
-
     const newHashedPassword = await bcrypt.hash(newPassword, 10);
     console.log(newHashedPassword);
 
@@ -226,10 +213,6 @@ app.put('/api/updateUser', avatar.single('newAvatar'), async (req, res) => {
       }
       const newHashedPassword = await bcrypt.hash(newPassword, 10);
       updateObj.hashedPassword = newHashedPassword;
-    }
-
-    if (newAvatarUrl) {
-      updateObj.avatarUrl = newAvatarUrl;
     }
 
     if (theme && theme !== '0') {

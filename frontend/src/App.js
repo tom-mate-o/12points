@@ -14,6 +14,9 @@ import Settings from './pages/settings';
 import Login from './pages/login';
 import Register from './pages/register';
 
+import BetSuccessful from './pages/betSuccessful';
+import VoteSuccessful from './pages/voteSuccessful';
+
 import ResetPassword from './pages/resetpassword';
 import NotFoundPage from './pages/notFoundPage';
 
@@ -147,6 +150,34 @@ function App() {
               element={
                 loggedIn ? (
                   <Feed />
+                ) : (
+                  <Login
+                    handleLogin={handleLogin}
+                    loggedIn={loggedIn}
+                    replace
+                  />
+                )
+              }
+            />
+            <Route
+              path="/betsuccessful"
+              element={
+                loggedIn ? (
+                  <BetSuccessful />
+                ) : (
+                  <Login
+                    handleLogin={handleLogin}
+                    loggedIn={loggedIn}
+                    replace
+                  />
+                )
+              }
+            />
+            <Route
+              path="/votesuccessful"
+              element={
+                loggedIn ? (
+                  <VoteSuccessful />
                 ) : (
                   <Login
                     handleLogin={handleLogin}

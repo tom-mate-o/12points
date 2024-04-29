@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+
 import countries from '../countries.json';
 
 //Costum Hooks
@@ -54,6 +56,7 @@ export default function Bet() {
 
   const [selectedPlaces, setSelectedPlaces] = useState({});
   const [userSelectedPlaces, setUserSelectedPlaces] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -84,12 +87,18 @@ export default function Bet() {
     fetchUser();
   }, [userData]);
 
-  function submitVotes() {
-    console.log(selectedPlaces);
-
+  async function submitVotes() {
     const id = decodedToken;
     const bet = selectedPlaces;
-    putRankingBetResultsToUserConfig(id, bet);
+    const success = await putRankingBetResultsToUserConfig(id, bet);
+
+    console.log(selectedPlaces);
+
+    if (success) {
+      console.log(selectedPlaces);
+      navigate('/betsuccessful', { state: selectedPlaces });
+      console.log('success');
+    }
   }
 
   const toggleMoreFunction = function (element) {
@@ -143,7 +152,7 @@ export default function Bet() {
                     <p>{country.participant}</p>
                   </div>
                   {userSelectedPlaces[country.name] && (
-                    <span>{userSelectedPlaces[country.name]}</span>
+                    <span>{'Rank ' + userSelectedPlaces[country.name]}</span>
                   )}
                   <select
                     defaultValue={'-'}
