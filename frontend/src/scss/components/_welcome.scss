@@ -1,0 +1,29 @@
+@use '../util/' as u;
+
+.welcomeLogo {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 80%;
+    text-align: center;
+    margin-bottom: u.rem(25);
+  }
+}
+
+.introtext {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: u.rem(35);
+  padding-left: u.rem(30);
+  padding-right: u.rem(30);
+
+  p {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+}

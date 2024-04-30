@@ -52,8 +52,8 @@ export default function Login({ handleLogin, loggedIn }) {
 
   return (
     <div>
-      <div className="logo">
-        {/* <img src={birbImages['logo']} alt="hi"></img> */}
+      <div className="welcomeLogo">
+        <img src={birbImages.logo} alt="logo" />
       </div>
       <div className="introtext">
         <p>

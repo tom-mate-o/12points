@@ -1,0 +1,70 @@
+@use '../util/' as u;
+
+.friendlistGrid {
+  display: grid;
+  grid-template-columns: 1fr 6fr auto;
+  grid-template-rows: 1fr;
+
+  padding-inline: u.rem(10);
+  padding-block: u.rem(7);
+  width: 100%;
+
+  .friendlistGrid__avatar {
+    grid-column: 1 / 2;
+
+    img {
+      width: u.rem(40);
+      border-radius: u.rem(15);
+      margin-inline-end: u.rem(7);
+    }
+  }
+
+  .friendlistGrid__name {
+    grid-column: 2 / 3;
+
+    h2 {
+      font-size: u.rem(20);
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: u.rem(15);
+      font-weight: lighter;
+    }
+  }
+
+  .friendlistGrid__buttonContainer {
+    grid-column: 3 / 4;
+    display: flex;
+    flex-direction: row;
+    gap: u.rem(7);
+
+    button {
+      background-color: var(--button);
+      border: none;
+      color: var(--button-text);
+      font-size: 2.5em;
+      padding: 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: var(--hoverButton);
+      }
+    }
+  }
+
+  &.gradientContainer {
+    background: var(--gradientContainer-bg);
+
+    &.currentUser {
+      background: var(--gradientContainerCurrentUser-bg);
+    }
+  }
+}

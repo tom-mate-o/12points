@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 export const FriendListGrid = styled.div`
-  border-radius: 15px;
   margin-top: 10px;
   width: 100%;
   color: var(--textOnDark);
@@ -34,12 +33,12 @@ export const FriendListGrid = styled.div`
 
   .buttonContainer {
     grid-column: 3 / 4;
-    width: 150px;
-    text-align: right;
+    width: auto;
+
     font-size: 0.8em;
     font-weight: 300;
     display: flex;
-    justify-content: left;
+    justify-content: flex-end;
 
     button {
       background-color: var(--button);

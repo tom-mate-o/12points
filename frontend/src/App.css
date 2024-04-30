@@ -80,53 +80,6 @@ hr {
   width: 100%;
 }
 
-.navbar {
-  right: 0;
-  background-color: var(--navbar);
-  color: var(--navBarIcons);
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  font-size: 20px;
-}
-
-.navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.navbar li {
-  float: left;
-}
-
-.navbar li a {
-  display: block;
-  color: var(--navBarIcons);
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.navbar li a:visited {
-  color: var(--navBarIcons);
-}
-
-.navbar li a:hover {
-  background-color: var(--hoverButton);
-}
-
-.contentContainer {
-  width: 100%;
-  max-width: 500px;
-
-  padding-top: 35px;
-  padding-left: 15px;
-  padding-bottom: 80px;
-}
-
 .buttonContainer {
   display: flex;
   flex-direction: row;

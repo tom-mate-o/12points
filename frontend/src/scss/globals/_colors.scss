@@ -1,0 +1,26 @@
+:root.sunriseSunset-theme {
+  --main-bg: linear-gradient(to bottom, #fe46de, #702db7);
+  --main-text-color: #ffffff;
+  --textOnBright: #355070;
+  --mainContainer: #3f1c71;
+  --button: #1dc1df;
+  --hoverButton: #23d5f5;
+  --button-text: #000978;
+  --navbar: linear-gradient(to bottom, #fc41d1, #f3d815);
+
+  --highlightedContainer: #e88c7d;
+  --goodThingContainer: #ffffff;
+  --textOnDark: #ffffff;
+  --infoContainer: #eebba0;
+  --textInContainer: #ffffff;
+  --navBarIcons: #ffffff;
+  --textOnButton: #ffffff;
+  --fontFamily: 'Poppins', sans-serif;
+  --red: #de0000;
+  --gradientContainer-bg: linear-gradient(to bottom, #fc41d1, #ff5c00);
+  --gradientContainerCurrentUser-bg: linear-gradient(
+    to bottom,
+    #fc41d1,
+    #702db7
+  );
+}

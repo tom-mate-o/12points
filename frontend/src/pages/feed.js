@@ -61,23 +61,27 @@ export default function Feed() {
 
   return (
     <div>
-      <Title>Feed</Title>
+      <img src={birbImages.logo} alt="logo" className="logo" />
 
       <MainContainer>
-        <Boxtitle>You</Boxtitle>
         {currentUser && (
-          <FriendListGrid key={currentUser.id}>
-            <div className="avatar">
+          <div
+            className="friendlistGrid gradientContainer currentUser"
+            key={currentUser.id}
+          >
+            <div className="friendlistGrid__avatar">
               <img
                 src={`${currentUser.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
                 alt={currentUser.name}
               />
             </div>
-            <div className="name">
-              <p>{currentUser.username}</p>
-              <CalculatePoints userBet={currentUser.bet} />
+            <div className="friendlistGrid__name">
+              <h2>{currentUser.username}</h2>
+              <h3>
+                <CalculatePoints userBet={currentUser.bet} />
+              </h3>
             </div>
-            <div className="buttonContainer">
+            <div className="friendlistGrid__buttonContainer">
               {currentUser.voting &&
               Object.keys(currentUser.voting).length > 0 ? (
                 <NavLink to={`/friendvoting/${currentUser.id}`}>
@@ -99,25 +103,26 @@ export default function Feed() {
                 ''
               )}
             </div>
-          </FriendListGrid>
+          </div>
         )}
-        <hr />
-        <Boxtitle>Your Friends</Boxtitle>
+
         {otherUsers.map((user) => {
           return (
-            <FriendListGrid key={user.id}>
-              <div className="avatar">
+            <div className="friendlistGrid gradientContainer" key={user.id}>
+              <div className="friendlistGrid__avatar">
                 {' '}
                 <img
                   src={`${user.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
                   alt={user.name}
                 />
               </div>
-              <div className="name">
-                <p>{user.username}</p>
-                <CalculatePoints userBet={user.bet} />
+              <div className="friendlistGrid__name">
+                <h2>{user.username}</h2>
+                <h3>
+                  <CalculatePoints userBet={user.bet} />
+                </h3>
               </div>
-              <div className="buttonContainer">
+              <div className="friendlistGrid__buttonContainer">
                 {user.voting && Object.keys(user.voting).length > 0 ? (
                   <NavLink to={`/friendvoting/${user.id}`}>
                     <button>
@@ -138,7 +143,7 @@ export default function Feed() {
                   ''
                 )}
               </div>
-            </FriendListGrid>
+            </div>
           );
         })}
       </MainContainer>

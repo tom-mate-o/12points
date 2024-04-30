@@ -1,0 +1,39 @@
+@use '../util/' as u;
+
+.navbar {
+  right: 0;
+  background: var(--navbar);
+  color: var(--navBarIcons);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: u.rem(20);
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar li a {
+  display: block;
+  color: var(--navBarIcons);
+  text-align: center;
+  padding: u.rem(14) u.rem(16);
+  text-decoration: none;
+}
+
+.navbar li a:visited {
+  color: var(--navBarIcons);
+}
+
+.navbar li a:hover {
+  background-color: var(--hoverButton);
+}

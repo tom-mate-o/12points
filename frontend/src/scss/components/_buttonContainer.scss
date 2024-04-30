@@ -1,0 +1,11 @@
+@use '../util/' as u;
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: u.rem(15);
+  gap: u.rem(15);
+  width: 100%;
+}
