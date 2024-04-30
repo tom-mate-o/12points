@@ -18,6 +18,7 @@ import { Button } from '../styledComponents/button';
 import { VoteContainer } from '../styledComponents/voteContainer';
 
 export default function Voting() {
+  const voteOpen = true;
   const [disabledPoints, setDisabledPoints] = useState([]);
 
   const [selectedPoints, setSelectedPoints] = useState({});
@@ -105,76 +106,85 @@ export default function Voting() {
       <Title>Personal Vote</Title>
 
       <MainContainer>
-        <hr />
-        {countries
-          .filter((country) => country.final)
-          .sort((a, b) => a.startnumber - b.startnumber)
-          .map((country) => (
-            <VoteContainer key={country.code}>
-              <div className="artistContainer">
-                <div className="rowContainer">
-                  <img
-                    className="countryFlag"
-                    src={`/flags/${country.flag}.png`}
-                    alt={country.name}
-                  />
+        {voteOpen ? (
+          countries
+            .filter((country) => country.final)
+            .sort((a, b) => a.startnumber - b.startnumber)
+            .map((country) => (
+              <VoteContainer key={country.code}>
+                <div className="artistContainer">
+                  <div className="rowContainer">
+                    <img
+                      className="countryFlag"
+                      src={`/flags/${country.flag}.png`}
+                      alt={country.name}
+                    />
 
-                  <div className="infoContainer">
-                    <h3>
-                      <b>{country.name}</b>
-                    </h3>
-                    <p>{country.participant}</p>
+                    <div className="infoContainer">
+                      <h3>
+                        <b>{country.name}</b>
+                      </h3>
+                      <p>{country.participant}</p>
+                    </div>
+                    {userSelectedPoints[country.name] && (
+                      <span>
+                        {userSelectedPoints[country.name] + ' Points'}
+                      </span>
+                    )}
+                    <select
+                      defaultValue="0"
+                      onChange={(e) => pushNumbers(e, country.name)}
+                    >
+                      {pointArray.map((point, index) => (
+                        <option
+                          key={index}
+                          value={point}
+                          disabled={disabledPoints.includes(point)}
+                        >
+                          {point}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  {userSelectedPoints[country.name] && (
-                    <span>{userSelectedPoints[country.name] + ' Points'}</span>
-                  )}
-                  <select
-                    defaultValue="0"
-                    onChange={(e) => pushNumbers(e, country.name)}
+                  <i>
+                    <p className="song">"{country.song}"</p>
+                  </i>
+                  <button
+                    onClick={(e) => {
+                      const toggleMoreDiv = e.target.nextSibling;
+                      toggleMoreFunction(toggleMoreDiv);
+                    }}
                   >
-                    {pointArray.map((point, index) => (
-                      <option
-                        key={index}
-                        value={point}
-                        disabled={disabledPoints.includes(point)}
-                      >
-                        {point}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <i>
-                  <p className="song">"{country.song}"</p>
-                </i>
-                <button
-                  onClick={(e) => {
-                    const toggleMoreDiv = e.target.nextSibling;
-                    toggleMoreFunction(toggleMoreDiv);
-                  }}
-                >
-                  open more
-                </button>
-                <div className="toggleMore open">
-                  <iframe
-                    style={{ borderRadius: '12px' }}
-                    src={country.spotify}
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allowFullScreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  ></iframe>
-                  <a href={country.url} target="_blank">
-                    <button>Artist Info</button>
-                  </a>
-                </div>
+                    open more
+                  </button>
+                  <div className="toggleMore open">
+                    <iframe
+                      style={{ borderRadius: '12px' }}
+                      src={country.spotify}
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allowFullScreen=""
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                    ></iframe>
+                    <a href={country.url} target="_blank">
+                      <button>Artist Info</button>
+                    </a>
+                  </div>
 
-                <hr />
-              </div>
-            </VoteContainer>
-          ))}
-        <button onClick={submitVotes}>Submit</button>
+                  <hr />
+                </div>
+              </VoteContainer>
+            ))
+        ) : (
+          <p>
+            The vote is not open yet.
+            <br />
+            It will open as soon as the finalists are announced.
+          </p>
+        )}
+        {voteOpen && <button onClick={submitVotes}>Submit</button>}
       </MainContainer>
     </div>
   );

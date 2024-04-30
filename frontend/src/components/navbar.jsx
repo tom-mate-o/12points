@@ -7,6 +7,7 @@ import { IoSettingsSharp } from 'react-icons/io5';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { FaRankingStar } from 'react-icons/fa6';
 import { FaUserFriends } from 'react-icons/fa';
+import { FaHeadphones } from 'react-icons/fa';
 
 export default function Navbar({ isBellRed, handleIconClick }) {
   return (
@@ -28,6 +29,12 @@ export default function Navbar({ isBellRed, handleIconClick }) {
           <li>
             <NavLink to="/bet">
               <FaRankingStar onClick={handleIconClick} />
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/artists">
+              <FaHeadphones onClick={handleIconClick} />
             </NavLink>
           </li>
 

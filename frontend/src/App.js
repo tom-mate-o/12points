@@ -9,6 +9,7 @@ import Feed from './pages/feed';
 import Voting from './pages/voting';
 import Bet from './pages/bet';
 import Friends from './pages/friends';
+import Artists from './pages/artists';
 
 import Settings from './pages/settings';
 import Login from './pages/login';
@@ -279,6 +280,20 @@ function App() {
               element={
                 loggedIn ? (
                   <Settings handleLogout={handleLogout} />
+                ) : (
+                  <Login
+                    handleLogin={handleLogin}
+                    loggedIn={loggedIn}
+                    replace
+                  />
+                )
+              }
+            />
+            <Route
+              path="/artists"
+              element={
+                loggedIn ? (
+                  <Artists handleLogout={handleLogout} />
                 ) : (
                   <Login
                     handleLogin={handleLogin}

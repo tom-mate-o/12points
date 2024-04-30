@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import Countdown, { contdown } from '../components/countdown';
 
 import countries from '../countries.json';
 
@@ -22,9 +21,7 @@ import { HighlightedContainer } from '../styledComponents/hightlightedContainer'
 import { Boxtitle } from '../styledComponents/boxtitle';
 import { VoteContainer } from '../styledComponents/voteContainer';
 
-export default function Bet() {
-  const betOpen = true;
-
+export default function Artists() {
   const [isLoading, setIsLoading] = useState(true);
   const [rankArray, setRankArray] = useState([
     '-',
@@ -132,86 +129,59 @@ export default function Bet() {
 
   return (
     <div>
-      <Title>Bet</Title>
+      <Title>Artists</Title>
 
       <MainContainer>
-        {betOpen ? (
-          countries
-            .filter((country) => country.final)
-            .sort((a, b) => a.startnumber - b.startnumber)
-            .map((country) => (
-              <VoteContainer key={country.code}>
-                <div className="artistContainer">
-                  <div className="rowContainer">
-                    <img
-                      className="countryFlag"
-                      src={`/flags/${country.flag}.png`}
-                      alt={country.name}
-                    />
+        {countries
+          .sort((a, b) => a.startnumber - b.startnumber)
+          .map((country) => (
+            <VoteContainer key={country.code}>
+              <div className="artistContainer">
+                <div className="rowContainer">
+                  <img
+                    className="countryFlag"
+                    src={`/flags/${country.flag}.png`}
+                    alt={country.name}
+                  />
 
-                    <div className="infoContainer">
-                      <h3>
-                        <b>{country.name}</b>
-                      </h3>
-                      <p>{country.participant}</p>
-                    </div>
-                    {userSelectedPlaces[country.name] && (
-                      <span>{'Rank ' + userSelectedPlaces[country.name]}</span>
-                    )}
-                    <select
-                      defaultValue={'-'}
-                      onChange={(e) => pushPlaces(e, country.name)}
-                    >
-                      {rankArray.map((rank, index) => (
-                        <option
-                          key={index}
-                          value={rank}
-                          disabled={disabledPlaces.includes(rank)}
-                        >
-                          {rank}
-                        </option>
-                      ))}
-                    </select>
+                  <div className="infoContainer">
+                    <h3>
+                      <b>{country.name}</b>
+                    </h3>
+                    <p>{country.participant}</p>
                   </div>
-                  <i>
-                    <p className="song">"{country.song}"</p>
-                  </i>
-                  <button
-                    onClick={(e) => {
-                      const toggleMoreDiv = e.target.nextSibling;
-                      toggleMoreFunction(toggleMoreDiv);
-                    }}
-                  >
-                    open more
-                  </button>
-                  <div className="toggleMore open">
-                    <iframe
-                      style={{ borderRadius: '12px' }}
-                      src={country.spotify}
-                      width="100%"
-                      height="152"
-                      frameBorder="0"
-                      allowFullScreen=""
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                    ></iframe>
-                    <a href={country.url} target="_blank">
-                      <button>Artist Info</button>
-                    </a>
-                  </div>
-
-                  <hr />
                 </div>
-              </VoteContainer>
-            ))
-        ) : (
-          <p>
-            The bet is not open yet.
-            <br />
-            It will open as soon as the finalists are announced.
-          </p>
-        )}
-        {betOpen && <button onClick={submitVotes}>Submit</button>}
+                <i>
+                  <p className="song">"{country.song}"</p>
+                </i>
+                <button
+                  onClick={(e) => {
+                    const toggleMoreDiv = e.target.nextSibling;
+                    toggleMoreFunction(toggleMoreDiv);
+                  }}
+                >
+                  open more
+                </button>
+                <div className="toggleMore open">
+                  <iframe
+                    style={{ borderRadius: '12px' }}
+                    src={country.spotify}
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allowFullScreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
+                  <a href={country.url} target="_blank">
+                    <button>Artist Info</button>
+                  </a>
+                </div>
+
+                <hr />
+              </div>
+            </VoteContainer>
+          ))}
       </MainContainer>
     </div>
   );

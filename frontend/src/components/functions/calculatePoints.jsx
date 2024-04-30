@@ -28,7 +28,6 @@ export default function CalculatePoints({ userBet }) {
         }
       }
     }
-    console.log('points calculated');
   });
 
   return <div>User points: {points}</div>;

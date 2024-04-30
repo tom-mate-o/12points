@@ -156,56 +156,6 @@ export default function Settings({ handleLogout }) {
         </InputField>
       </MainContainer>
 
-      <SubTitle>Theme</SubTitle>
-      <MainContainer>
-        <Boxtitle>
-          select a different Theme
-          <br />
-          (Changes will be visible after a new login)
-        </Boxtitle>
-        <Select
-          labelId="select-label"
-          className="select"
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          sx={{
-            marginTop: '15px',
-            height: 50,
-            width: '100%',
-            fontFamily: 'var(--fontFamily)',
-            fontWeight: '800',
-            borderRadius: '15px',
-            backgroundColor: 'var(--textOnButton)',
-            color: 'var(--textOnBright)',
-          }}
-          MenuProps={{
-            PaperProps: {
-              sx: {
-                backgroundColor: 'var(--textOnButton)',
-                borderRadius: '15px',
-              },
-            },
-          }}
-        >
-          <MenuItem disabled value={null}>
-            Choose a Theme
-          </MenuItem>
-          <MenuItem value={'sunriseSunset-theme'}>
-            Sunrise/Sunset Theme
-          </MenuItem>
-          <MenuItem value={'dracula-theme'}>Dracula Theme</MenuItem>
-        </Select>
-      </MainContainer>
-
-      <SubTitle>Time - Notification</SubTitle>
-      <MainContainer>
-        <Boxtitle>select a time for your 3LB-Notification</Boxtitle>
-        <InputField>
-          <input type="time" ref={notificationTime} disabled={true}></input>
-          <Boxtitle>coming soon</Boxtitle>
-        </InputField>
-      </MainContainer>
-
       <WideButton onClick={saveSettings}>Save the Settings</WideButton>
     </div>
   );

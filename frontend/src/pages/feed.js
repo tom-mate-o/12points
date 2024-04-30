@@ -6,6 +6,7 @@ import { TiHeartFullOutline } from 'react-icons/ti';
 import { FaRankingStar } from 'react-icons/fa6';
 import Avatar from 'boring-avatars';
 import CalculatePoints from '../components/functions/calculatePoints';
+import { jwtDecode } from 'jwt-decode';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -36,14 +37,12 @@ export default function Feed() {
     refetch();
   }, []);
 
-  const colors = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
-  const getRandomColors = () => {
-    const colors = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
-    return colors
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 5)
-      .join(',');
-  };
+  const token = localStorage.getItem('token');
+  const decodedToken = jwtDecode(token);
+  const currentUser = userData.find((user) => user.id === decodedToken.id);
+  const otherUsers = userData
+    .filter((user) => user.id !== decodedToken.id)
+    .sort((a, b) => a.username.localeCompare(b.username));
 
   if (!userData || userData.length === 0) {
     return (
@@ -65,9 +64,46 @@ export default function Feed() {
       <Title>Feed</Title>
 
       <MainContainer>
-        <Boxtitle>Your Friends</Boxtitle>
+        <Boxtitle>You</Boxtitle>
+        {currentUser && (
+          <FriendListGrid key={currentUser.id}>
+            <div className="avatar">
+              <img
+                src={`${currentUser.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
+                alt={currentUser.name}
+              />
+            </div>
+            <div className="name">
+              <p>{currentUser.username}</p>
+              <CalculatePoints userBet={currentUser.bet} />
+            </div>
+            <div className="buttonContainer">
+              {currentUser.voting &&
+              Object.keys(currentUser.voting).length > 0 ? (
+                <NavLink to={`/friendvoting/${currentUser.id}`}>
+                  <button>
+                    <TiHeartFullOutline />
+                  </button>
+                </NavLink>
+              ) : (
+                ''
+              )}
 
-        {userData.map((user) => {
+              {currentUser.bet && Object.keys(currentUser.bet).length > 0 ? (
+                <NavLink to={`/friendbet/${currentUser.id}`}>
+                  <button>
+                    <FaRankingStar />
+                  </button>
+                </NavLink>
+              ) : (
+                ''
+              )}
+            </div>
+          </FriendListGrid>
+        )}
+        <hr />
+        <Boxtitle>Your Friends</Boxtitle>
+        {otherUsers.map((user) => {
           return (
             <FriendListGrid key={user.id}>
               <div className="avatar">
