@@ -5,6 +5,7 @@ import Countdown, { contdown } from '../components/countdown';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { FaRankingStar } from 'react-icons/fa6';
 import Avatar from 'boring-avatars';
+import CalculatePoints from '../components/functions/calculatePoints';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -29,7 +30,12 @@ export default function Feed() {
     window.scrollTo(0, 0);
   }, []);
 
-  const { userData, setUserData } = useMongoDBUserData([]);
+  const { userData, refetch } = useMongoDBUserData([]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
   const colors = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
   const getRandomColors = () => {
     const colors = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
@@ -61,41 +67,44 @@ export default function Feed() {
       <MainContainer>
         <Boxtitle>Your Friends</Boxtitle>
 
-        {userData.map((user) => (
-          <FriendListGrid key={user.id}>
-            <div className="avatar">
-              {' '}
-              <img
-                src={`${user.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
-                alt={user.name}
-              />
-            </div>
-            <div className="name">
-              <p>{user.username}</p>
-            </div>
-            <div className="buttonContainer">
-              {user.voting && Object.keys(user.voting).length > 0 ? (
-                <NavLink to={`/friendvoting/${user.id}`}>
-                  <button>
-                    <TiHeartFullOutline />
-                  </button>
-                </NavLink>
-              ) : (
-                ''
-              )}
+        {userData.map((user) => {
+          return (
+            <FriendListGrid key={user.id}>
+              <div className="avatar">
+                {' '}
+                <img
+                  src={`${user.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
+                  alt={user.name}
+                />
+              </div>
+              <div className="name">
+                <p>{user.username}</p>
+                <CalculatePoints userBet={user.bet} />
+              </div>
+              <div className="buttonContainer">
+                {user.voting && Object.keys(user.voting).length > 0 ? (
+                  <NavLink to={`/friendvoting/${user.id}`}>
+                    <button>
+                      <TiHeartFullOutline />
+                    </button>
+                  </NavLink>
+                ) : (
+                  ''
+                )}
 
-              {user.bet && Object.keys(user.bet).length > 0 ? (
-                <NavLink to={`/friendbet/${user.id}`}>
-                  <button>
-                    <FaRankingStar />
-                  </button>
-                </NavLink>
-              ) : (
-                ''
-              )}
-            </div>
-          </FriendListGrid>
-        ))}
+                {user.bet && Object.keys(user.bet).length > 0 ? (
+                  <NavLink to={`/friendbet/${user.id}`}>
+                    <button>
+                      <FaRankingStar />
+                    </button>
+                  </NavLink>
+                ) : (
+                  ''
+                )}
+              </div>
+            </FriendListGrid>
+          );
+        })}
       </MainContainer>
 
       <div className="buttonContainer">
