@@ -1,0 +1,20 @@
+@use '../util/' as u;
+
+.moreButton {
+  background-color: var(--button);
+  border: none;
+  color: var(--button-text);
+  font-size: 2.5em;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--hoverButton);
+  }
+}

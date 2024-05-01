@@ -4,6 +4,8 @@ import { jwtDecode } from 'jwt-decode';
 import countries from '../countries.json';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import Countdown from '../components/countdown';
+import { TiHeartFullOutline } from 'react-icons/ti';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -103,7 +105,28 @@ export default function Voting() {
 
   return (
     <div>
-      <Title>Personal Vote</Title>
+      <div className="title">
+        <p>Personal</p>
+        <div className="title__lastRow">
+          <p>Vote</p>
+          <span>
+            <TiHeartFullOutline />
+          </span>
+        </div>
+      </div>
+
+      <MainContainer>
+        <div className="infoText">
+          12 points go to... 😉
+          <br />
+          Give your personal points to the finalists of the ESC 2024.
+        </div>
+      </MainContainer>
+
+      <div className="countdown">
+        {' '}
+        <Countdown />
+      </div>
 
       <MainContainer>
         {voteOpen ? (
@@ -111,51 +134,57 @@ export default function Voting() {
             .filter((country) => country.final)
             .sort((a, b) => a.startnumber - b.startnumber)
             .map((country) => (
-              <VoteContainer key={country.code}>
-                <div className="artistContainer">
-                  <div className="rowContainer">
-                    <img
-                      className="countryFlag"
-                      src={`/flags/${country.flag}.png`}
-                      alt={country.name}
-                    />
+              <VoteContainer className="voteContainer" key={country.code}>
+                <div className="voteContainer__artistContainer">
+                  <div className="voteContainer__rowContainer">
+                    <div className="voteContainer__countryContainer">
+                      <img
+                        className="voteContainer__countryFlag"
+                        src={`/flags/${country.flag}.png`}
+                        alt={country.name}
+                      />
 
-                    <div className="infoContainer">
-                      <h3>
+                      <h3 className="country">
                         <b>{country.name}</b>
                       </h3>
-                      <p>{country.participant}</p>
                     </div>
-                    {userSelectedPoints[country.name] && (
-                      <span>
-                        {userSelectedPoints[country.name] + ' Points'}
-                      </span>
-                    )}
-                    <select
-                      defaultValue="0"
-                      onChange={(e) => pushNumbers(e, country.name)}
-                    >
-                      {pointArray.map((point, index) => (
-                        <option
-                          key={index}
-                          value={point}
-                          disabled={disabledPoints.includes(point)}
-                        >
-                          {point}
-                        </option>
-                      ))}
-                    </select>
+
+                    <div className="voteContainer__pointsContainer">
+                      {userSelectedPoints[country.name] && (
+                        <span>
+                          {userSelectedPoints[country.name] + ' Points'}
+                        </span>
+                      )}
+                      <select
+                        defaultValue="0"
+                        onChange={(e) => pushNumbers(e, country.name)}
+                      >
+                        {pointArray.map((point, index) => (
+                          <option
+                            key={index}
+                            value={point}
+                            disabled={disabledPoints.includes(point)}
+                          >
+                            {point}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                  <i>
-                    <p className="song">"{country.song}"</p>
-                  </i>
+                  <div className="voteContainer__infoContainer">
+                    <p>{country.participant}</p>
+                    <i>
+                      <p className="voteContainer__song">"{country.song}"</p>
+                    </i>
+                  </div>
                   <button
+                    className="moreButton"
                     onClick={(e) => {
                       const toggleMoreDiv = e.target.nextSibling;
                       toggleMoreFunction(toggleMoreDiv);
                     }}
                   >
-                    open more
+                    ^
                   </button>
                   <div className="toggleMore open">
                     <iframe
@@ -169,7 +198,7 @@ export default function Voting() {
                       loading="lazy"
                     ></iframe>
                     <a href={country.url} target="_blank">
-                      <button>Artist Info</button>
+                      <button className="bigBlueButton">Artist Info</button>
                     </a>
                   </div>
 
@@ -184,7 +213,11 @@ export default function Voting() {
             It will open as soon as the finalists are announced.
           </p>
         )}
-        {voteOpen && <button onClick={submitVotes}>Submit</button>}
+        {voteOpen && (
+          <button onClick={submitVotes} className="bigBlueButton">
+            Submit
+          </button>
+        )}
       </MainContainer>
     </div>
   );

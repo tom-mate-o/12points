@@ -11,13 +11,13 @@
   width: 100%;
   margin-inline: 0;
   font-size: u.rem(20);
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--button-text);
 
   p {
     font-size: u.rem(20);
-    font-weight: bold;
+    font-weight: 600;
   }
 
   &:hover {

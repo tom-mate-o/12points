@@ -1,0 +1,30 @@
+@use '../util/' as u;
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: u.rem(-10);
+  margin-inline-start: u.rem(15);
+  margin-block-start: u.rem(-5);
+
+  p {
+    font-size: u.rem(40);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--main-text-color);
+    line-height: 1;
+  }
+
+  &__lastRow {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: u.rem(7);
+
+    span {
+      display: flex;
+      font-size: u.rem(40);
+      font-weight: 700;
+    }
+  }
+}

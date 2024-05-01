@@ -1,6 +1,9 @@
 @use '../util/' as u;
 
 .countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid white;
   padding: u.rem(7);
   margin-inline: u.rem(15);
@@ -9,6 +12,7 @@
   border-radius: u.rem(50);
   color: --var(main-text-color);
   text-align: center;
+  min-height: u.rem(105);
 
   span {
     font-size: u.rem(25);
