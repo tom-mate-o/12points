@@ -53,6 +53,7 @@
       font-family: Open Sans;
       width: 40px;
       height: 40px;
+      padding: u.rem(2);
     }
     select {
       width: u.rem(40);
@@ -92,6 +93,7 @@
   }
 
   .toggleMore {
+    width: 100%;
     iframe {
       margin-block-start: u.rem(10);
       margin-block-end: u.rem(7);

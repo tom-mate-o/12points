@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import countries from '../countries.json';
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import Countdown from '../components/countdown';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { FaVoteYea } from 'react-icons/fa';
@@ -17,16 +16,12 @@ import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
 import { putVotingResultsToUserConfig } from '../utils/putVotingResultsToUserConfig';
 
 //Styled Components
-import { Title } from '../styledComponents/title';
 import { MainContainer } from '../styledComponents/mainContainer';
-import { Button } from '../styledComponents/button';
 import { VoteContainer } from '../styledComponents/voteContainer';
-import { set } from 'date-fns';
 
 export default function Voting() {
   const voteOpen = true;
   const [disabledPoints, setDisabledPoints] = useState([]);
-
   const [selectedPoints, setSelectedPoints] = useState({});
   const [userSelectedPoints, setUserSelectedPoints] = useState({});
   const navigate = useNavigate();
