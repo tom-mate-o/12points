@@ -21,6 +21,7 @@ import { Title } from '../styledComponents/title';
 import { MainContainer } from '../styledComponents/mainContainer';
 import { Button } from '../styledComponents/button';
 import { VoteContainer } from '../styledComponents/voteContainer';
+import { set } from 'date-fns';
 
 export default function Voting() {
   const voteOpen = true;
@@ -29,6 +30,7 @@ export default function Voting() {
   const [selectedPoints, setSelectedPoints] = useState({});
   const [userSelectedPoints, setUserSelectedPoints] = useState({});
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,8 +78,12 @@ export default function Voting() {
     }
   }
 
-  const toggleMoreFunction = function (element) {
+  const toggleMoreFunction = (element, countryName) => {
     element.classList.toggle('open');
+    setIsOpen((prevState) => ({
+      ...prevState,
+      [countryName]: !prevState[countryName],
+    }));
   };
 
   const pushNumbers = (e, countryName) => {
@@ -192,10 +198,14 @@ export default function Voting() {
                       onClick={(e) => {
                         const toggleMoreDiv =
                           e.currentTarget.nextElementSibling;
-                        toggleMoreFunction(toggleMoreDiv);
+                        toggleMoreFunction(toggleMoreDiv, country.name);
                       }}
                     >
-                      <FaChevronCircleDown />
+                      {isOpen[country.name] ? (
+                        <FaChevronCircleUp />
+                      ) : (
+                        <FaChevronCircleDown />
+                      )}
                     </button>
                     <div className="toggleMore open">
                       <iframe
