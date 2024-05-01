@@ -35,8 +35,9 @@ h4 {
 
 p {
   margin: 0;
-  font-weight: 300;
-  font-size: u.rem(13);
+  font-weight: 400;
+  font-size: u.rem(15);
+  font-size: clamp(u.rem(15), 0.83rem + 0.47vw, u.rem(20));
 }
 
 a,

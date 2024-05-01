@@ -7,7 +7,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: var(--artistcontainer-bg);
   }
 
   &__rowContainer {
@@ -40,5 +39,65 @@
   }
 
   &__pointsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: u.rem(7);
+    span {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid white;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: Open Sans;
+      width: 40px;
+      height: 40px;
+    }
+    select {
+      width: u.rem(40);
+      height: u.rem(40);
+      border: none;
+      background-color: var(--button);
+      color: var(--button-text);
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Open Sans', sans-serif;
+      text-align: center;
+    }
+  }
+
+  &__lowerContainer {
+    width: 100%;
+    background-color: var(--lowerContainer-bg);
+    padding: u.rem(10);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__infoContainer {
+    &__text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      max-width: u.rem(200);
+      gap: u.rem(5);
+
+      &__song {
+        font-weight: 400;
+      }
+    }
+  }
+
+  .toggleMore {
+    iframe {
+      margin-block-start: u.rem(10);
+      margin-block-end: u.rem(7);
+    }
+  }
+  .toggleMore.open {
+    display: none;
   }
 }

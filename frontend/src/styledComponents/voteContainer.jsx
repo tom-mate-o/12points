@@ -52,24 +52,4 @@ export const VoteContainer = styled.div`
     justify-content: center;
     align-items: left;
   }
-
-  select {
-    width: 2.5rem;
-    width: clamp(2.5rem, 1.7857142857142856rem + 5.714285714285714vw, 3.125rem);
-    height: 2.5rem;
-    height: clamp(
-      2.5rem,
-      1.7857142857142856rem + 5.714285714285714vw,
-      3.125rem
-    );
-    border: none;
-    background-color: #1dc1df;
-    color: #000978;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    margin-left: 10px;
-    padding: 10px;
-  }
 `;

@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Countdown from '../components/countdown';
 import { TiHeartFullOutline } from 'react-icons/ti';
+import { FaVoteYea } from 'react-icons/fa';
+import { FaChevronCircleDown } from 'react-icons/fa';
+import { FaChevronCircleUp } from 'react-icons/fa';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -117,9 +120,11 @@ export default function Voting() {
 
       <MainContainer>
         <div className="infoText">
-          12 points go to... 😉
-          <br />
-          Give your personal points to the finalists of the ESC 2024.
+          <p>
+            12 points go to... 😉
+            <br />
+            Give your personal points to the finalists of the ESC 2024.
+          </p>
         </div>
       </MainContainer>
 
@@ -152,7 +157,8 @@ export default function Voting() {
                     <div className="voteContainer__pointsContainer">
                       {userSelectedPoints[country.name] && (
                         <span>
-                          {userSelectedPoints[country.name] + ' Points'}
+                          <FaVoteYea />
+                          {userSelectedPoints[country.name]}
                         </span>
                       )}
                       <select
@@ -171,38 +177,42 @@ export default function Voting() {
                       </select>
                     </div>
                   </div>
-                  <div className="voteContainer__infoContainer">
-                    <p>{country.participant}</p>
-                    <i>
-                      <p className="voteContainer__song">"{country.song}"</p>
-                    </i>
-                  </div>
-                  <button
-                    className="moreButton"
-                    onClick={(e) => {
-                      const toggleMoreDiv = e.target.nextSibling;
-                      toggleMoreFunction(toggleMoreDiv);
-                    }}
-                  >
-                    ^
-                  </button>
-                  <div className="toggleMore open">
-                    <iframe
-                      style={{ borderRadius: '12px' }}
-                      src={country.spotify}
-                      width="100%"
-                      height="152"
-                      frameBorder="0"
-                      allowFullScreen=""
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                    ></iframe>
-                    <a href={country.url} target="_blank">
-                      <button className="bigBlueButton">Artist Info</button>
-                    </a>
-                  </div>
+                  <div className="voteContainer__lowerContainer">
+                    <div className="voteContainer__infoContainer">
+                      <div className="voteContainer__infoContainer__text">
+                        <h3>{country.participant}</h3>
 
-                  <hr />
+                        <p className="voteContainer__infoContainer__song">
+                          "{country.song}"
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      className="moreButton"
+                      onClick={(e) => {
+                        const toggleMoreDiv =
+                          e.currentTarget.nextElementSibling;
+                        toggleMoreFunction(toggleMoreDiv);
+                      }}
+                    >
+                      <FaChevronCircleDown />
+                    </button>
+                    <div className="toggleMore open">
+                      <iframe
+                        style={{ borderRadius: '12px' }}
+                        src={country.spotify}
+                        width="100%"
+                        height="152"
+                        frameBorder="0"
+                        allowFullScreen=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                      ></iframe>
+                      <a href={country.url} target="_blank">
+                        <button className="bigBlueButton">Artist Info</button>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </VoteContainer>
             ))
