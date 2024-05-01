@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { FaVoteYea } from 'react-icons/fa';
 
 //Styled Components
 import { Title } from '../styledComponents/title';
@@ -21,28 +22,36 @@ export default function BetSuccessful() {
 
   return (
     <div>
-      <Title>Bet successful</Title>
+      <div className="title">
+        <p>Ranking Bet</p>
+        <div className="title__lastRow">
+          <p>successful</p>
+          <span>
+            <FaVoteYea />
+          </span>
+        </div>
+      </div>
 
       <MainContainer>
-        <HighlightedContainer>
-          <p>
-            You have successfully placed your bet on the following countries:
-          </p>
-          <ul>
-            {Object.entries(selectedPlaces)
-              .sort((a, b) => a[1] - b[1])
-              .map(([place, rank], index) => {
-                return (
-                  <li key={index}>
-                    {place}: Rank {rank}
-                  </li>
-                );
-              })}
-          </ul>
-        </HighlightedContainer>
+        <p>You have successfully placed your bet on the following countries:</p>
+        <ul>
+          {Object.entries(selectedPlaces)
+            .sort((a, b) => a[1] - b[1])
+            .map(([place, rank], index) => {
+              return (
+                <li key={index}>
+                  {place}: Rank {rank}
+                </li>
+              );
+            })}
+        </ul>
+        <p>
+          Remember, your previous bets will be overwritten if you submit bets
+          again!
+        </p>
 
         <NavLink to="/bet">
-          <button>back</button>
+          <button className="bigBlueButton">back</button>
         </NavLink>
       </MainContainer>
     </div>

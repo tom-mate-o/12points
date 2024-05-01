@@ -4,7 +4,6 @@ import axios from 'axios';
 import showNotifications from '../components/showNotifications/showNotificationsToastify';
 
 export async function putRankingBetResultsToUserConfig(id, bet) {
-  showNotifications('config called');
   try {
     const config = {
       method: 'put',
@@ -14,11 +13,9 @@ export async function putRankingBetResultsToUserConfig(id, bet) {
       },
       data: JSON.stringify({ id: id.id, bet: bet }),
     };
-    showNotifications('config called');
 
     const response = await axios(config);
-    showNotifications('config called');
-    console.log(response.data.message);
+    showNotifications('Bet successfully submitted', 'success');
 
     return true;
   } catch (error) {

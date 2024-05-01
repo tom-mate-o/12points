@@ -76,10 +76,10 @@ export default function Feed() {
               />
             </div>
             <div className="friendlistGrid__name">
-              <h2>{currentUser.username}</h2>
-              <h3>
+              <h3>{currentUser.username}</h3>
+              <p>
                 <CalculatePoints userBet={currentUser.bet} />
-              </h3>
+              </p>
             </div>
             <div className="friendlistGrid__buttonContainer">
               {currentUser.voting &&
@@ -117,10 +117,10 @@ export default function Feed() {
                 />
               </div>
               <div className="friendlistGrid__name">
-                <h2>{user.username}</h2>
-                <h3>
+                <h3>{user.username}</h3>
+                <p>
                   <CalculatePoints userBet={user.bet} />
-                </h3>
+                </p>
               </div>
               <div className="friendlistGrid__buttonContainer">
                 {user.voting && Object.keys(user.voting).length > 0 ? (

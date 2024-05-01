@@ -7,7 +7,7 @@ export const VoteContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: var(--textInContainer);
-  padding-top: 10px;
+
   padding-bottom: 0px;
 
   .artistContainer {

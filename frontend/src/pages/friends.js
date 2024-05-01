@@ -7,6 +7,7 @@ import { FaRankingStar } from 'react-icons/fa6';
 import Avatar from 'boring-avatars';
 import CalculatePoints from '../components/functions/calculatePoints';
 import { jwtDecode } from 'jwt-decode';
+import { FaUserFriends } from 'react-icons/fa';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -61,34 +62,46 @@ export default function Friends() {
 
   return (
     <div>
-      <Title>Friends</Title>
-
-      <InfoContainer>
-        Du bekommst Punkte für jeden richtig getippten Platz.
-        <ul>
-          <li>1. Platz +25 Punkte </li>
-          <li>2. Platz +20 Punkte</li>
-          <li>3. Platz +15 Punkte </li>
-          <li>jeder weitere Platz +5 Punkte </li>
-          <li>richtiger letzter Platz +10 Punkte</li>
-        </ul>
-      </InfoContainer>
+      <div className="title">
+        <p>ESC 2024</p>
+        <div className="title__lastRow">
+          <p>Tipgroup</p>
+          <span>
+            <FaUserFriends />
+          </span>
+        </div>
+      </div>
 
       <MainContainer>
-        <Boxtitle>You</Boxtitle>
+        You will receive points for every correct place.
+        <ul>
+          <li>🥇 1st place +25 points</li>
+          <li>🥈 2nd place +20 points</li>
+          <li>🥉 3rd place +15 points</li>
+          <li>each further place +5 points</li>
+          <li>correct last place +10 points</li>
+        </ul>
+      </MainContainer>
+
+      <MainContainer>
         {currentUser && (
-          <FriendListGrid key={currentUser.id}>
-            <div className="avatar">
+          <div
+            className="friendlistGrid gradientContainer currentUser"
+            key={currentUser.id}
+          >
+            <div className="friendlistGrid__avatar">
               <img
                 src={`${currentUser.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
                 alt={currentUser.name}
               />
             </div>
-            <div className="name">
-              <p>{currentUser.username}</p>
-              <CalculatePoints userBet={currentUser.bet} />
+            <div className="friendlistGrid__name">
+              <h3>{currentUser.username}</h3>
+              <p>
+                <CalculatePoints userBet={currentUser.bet} />
+              </p>
             </div>
-            <div className="buttonContainer">
+            <div className="friendlistGrid__buttonContainer">
               {currentUser.voting &&
               Object.keys(currentUser.voting).length > 0 ? (
                 <NavLink to={`/friendvoting/${currentUser.id}`}>
@@ -110,25 +123,26 @@ export default function Friends() {
                 ''
               )}
             </div>
-          </FriendListGrid>
+          </div>
         )}
-        <hr />
-        <Boxtitle>Your Friends</Boxtitle>
+
         {otherUsers.map((user) => {
           return (
-            <FriendListGrid key={user.id}>
-              <div className="avatar">
+            <div className="friendlistGrid gradientContainer" key={user.id}>
+              <div className="friendlistGrid__avatar">
                 {' '}
                 <img
                   src={`${user.avatarUrl}?square&colors=8dedf9,cd72fe,f6ed60,ff99f2,fec880`}
                   alt={user.name}
                 />
               </div>
-              <div className="name">
-                <p>{user.username}</p>
-                <CalculatePoints userBet={user.bet} />
+              <div className="friendlistGrid__name">
+                <h3>{user.username}</h3>
+                <p>
+                  <CalculatePoints userBet={user.bet} />
+                </p>
               </div>
-              <div className="buttonContainer">
+              <div className="friendlistGrid__buttonContainer">
                 {user.voting && Object.keys(user.voting).length > 0 ? (
                   <NavLink to={`/friendvoting/${user.id}`}>
                     <button>
@@ -149,7 +163,7 @@ export default function Friends() {
                   ''
                 )}
               </div>
-            </FriendListGrid>
+            </div>
           );
         })}
       </MainContainer>

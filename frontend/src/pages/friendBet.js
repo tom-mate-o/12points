@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
 import countries from '../countries.json';
+import { FaChevronCircleDown } from 'react-icons/fa';
+import { FaChevronCircleUp } from 'react-icons/fa';
+import { TiHeartFullOutline } from 'react-icons/ti';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
@@ -16,10 +17,6 @@ import { putRankingBetResultsToUserConfig } from '../utils/putRankingBetResultsT
 //Styled Components
 import { Title } from '../styledComponents/title';
 import { MainContainer } from '../styledComponents/mainContainer';
-
-import { HighlightedContainer } from '../styledComponents/hightlightedContainer';
-
-import { Boxtitle } from '../styledComponents/boxtitle';
 import { VoteContainer } from '../styledComponents/voteContainer';
 
 export default function FriendBet() {
@@ -66,6 +63,8 @@ export default function FriendBet() {
     window.scrollTo(0, 0);
   }, []);
 
+  const [isOpen, setIsOpen] = useState({});
+
   const { userData, setUserData } = useMongoDBUserData([]);
 
   useEffect(() => {
@@ -106,8 +105,12 @@ export default function FriendBet() {
     }
   }
 
-  const toggleMoreFunction = function (element) {
+  const toggleMoreFunction = (element, countryName) => {
     element.classList.toggle('open');
+    setIsOpen((prevState) => ({
+      ...prevState,
+      [countryName]: !prevState[countryName],
+    }));
   };
 
   const pushPlaces = (e, countryName) => {
@@ -134,7 +137,15 @@ export default function FriendBet() {
 
   return (
     <div>
-      <Title>{username}'s Bet</Title>
+      <div className="title">
+        <p>{username}'s</p>
+        <div className="title__lastRow">
+          <p>Final Bet</p>
+          <span>
+            <TiHeartFullOutline />
+          </span>
+        </div>
+      </div>
 
       <MainContainer>
         {countries
@@ -145,53 +156,66 @@ export default function FriendBet() {
             (a, b) => userSelectedPlaces[a.name] - userSelectedPlaces[b.name]
           )
           .map((country) => (
-            <VoteContainer key={country.code}>
-              <div className="artistContainer">
-                <div className="rowContainer">
-                  <img
-                    className="countryFlag"
-                    src={`/flags/${country.flag}.png`}
-                    alt={country.name}
-                  />
+            <VoteContainer className="voteContainer" key={country.code}>
+              <div className="voteContainer__artistContainer">
+                <div className="voteContainer__rowContainer">
+                  <div className="voteContainer__countryContainer">
+                    <img
+                      className="voteContainer__countryFlag"
+                      src={`/flags/${country.flag}.png`}
+                      alt={country.name}
+                    />
 
-                  <div className="infoContainer">
-                    <h3>
+                    <h3 className="country">
                       <b>{country.name}</b>
                     </h3>
-                    <p>{country.participant}</p>
                   </div>
-                  {userSelectedPlaces[country.name] && (
-                    <span>{'Rank ' + userSelectedPlaces[country.name]}</span>
-                  )}
-                </div>
-                <i>
-                  <p className="song">"{country.song}"</p>
-                </i>
-                <button
-                  onClick={(e) => {
-                    const toggleMoreDiv = e.target.nextSibling;
-                    toggleMoreFunction(toggleMoreDiv);
-                  }}
-                >
-                  open more
-                </button>
-                <div className="toggleMore open">
-                  <iframe
-                    style={{ borderRadius: '12px' }}
-                    src={country.spotify}
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allowFullScreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  ></iframe>
-                  <a href={country.url} target="_blank">
-                    <button>Artist Info</button>
-                  </a>
-                </div>
 
-                <hr />
+                  <div className="voteContainer__pointsContainer friend">
+                    {userSelectedPlaces[country.name] && (
+                      <span>{userSelectedPlaces[country.name] + '.'}</span>
+                    )}
+                  </div>
+                </div>
+                <div className="voteContainer__lowerContainer">
+                  <div className="voteContainer__infoContainer">
+                    <div className="voteContainer__infoContainer__text">
+                      <h3>{country.participant}</h3>
+
+                      <p className="voteContainer__infoContainer__song">
+                        "{country.song}"
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    className="moreButton"
+                    onClick={(e) => {
+                      const toggleMoreDiv = e.currentTarget.nextElementSibling;
+                      toggleMoreFunction(toggleMoreDiv, country.name);
+                    }}
+                  >
+                    {isOpen[country.name] ? (
+                      <FaChevronCircleUp />
+                    ) : (
+                      <FaChevronCircleDown />
+                    )}
+                  </button>
+                  <div className="toggleMore open">
+                    <iframe
+                      style={{ borderRadius: '12px' }}
+                      src={country.spotify}
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allowFullScreen=""
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                    ></iframe>
+                    <a href={country.url} target="_blank">
+                      <button className="bigBlueButton">Artist Info</button>
+                    </a>
+                  </div>
+                </div>
               </div>
             </VoteContainer>
           ))}

@@ -4,7 +4,6 @@ import axios from 'axios';
 import showNotifications from '../components/showNotifications/showNotificationsToastify';
 
 export async function putVotingResultsToUserConfig(id, voting) {
-  showNotifications('config called');
   try {
     const config = {
       method: 'put',
@@ -14,11 +13,9 @@ export async function putVotingResultsToUserConfig(id, voting) {
       },
       data: JSON.stringify({ id: id.id, voting: voting }),
     };
-    showNotifications('config called');
 
     const response = await axios(config);
-    showNotifications('config called');
-    console.log(response.data.message);
+    showNotifications('Voting successfully submitted', 'success');
 
     return true;
   } catch (error) {

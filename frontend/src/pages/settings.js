@@ -70,8 +70,8 @@ export default function Settings({ handleLogout }) {
     formData.append('newAvatar', newAvatarUrl.current.files[0]);
     formData.append('newUsername', newUsername.current.value);
     formData.append('newPassword', password1.current.value);
-    formData.append('theme', value);
-    formData.append('notificationTime', notificationTime.current.value);
+    // formData.append('theme', value);
+    // formData.append('notificationTime', notificationTime.current.value);
     formData.append('userId', decodedToken.id);
 
     updateUserInDatabase(formData);

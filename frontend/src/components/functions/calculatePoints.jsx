@@ -33,7 +33,10 @@ export default function CalculatePoints({ userBet }) {
 
   return (
     <div className="friendlistGrid__name__points">
-      <FaStar /> <p>{points}</p>
+      <div>
+        <FaStar />
+      </div>{' '}
+      <p>{points}</p>
     </div>
   );
 }

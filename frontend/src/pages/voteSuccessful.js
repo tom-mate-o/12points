@@ -1,14 +1,11 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { FaVoteYea } from 'react-icons/fa';
 
 //Styled Components
-import { Title } from '../styledComponents/title';
+
 import { MainContainer } from '../styledComponents/mainContainer';
-
-import { HighlightedContainer } from '../styledComponents/hightlightedContainer';
-
-import { Boxtitle } from '../styledComponents/boxtitle';
 
 export default function VoteSuccessful() {
   useEffect(() => {
@@ -21,26 +18,36 @@ export default function VoteSuccessful() {
 
   return (
     <div>
-      <Title>Vote successful</Title>
+      <div className="title">
+        <p>Vote</p>
+        <div className="title__lastRow">
+          <p>successful</p>
+          <span>
+            <FaVoteYea />
+          </span>
+        </div>
+      </div>
 
       <MainContainer>
-        <HighlightedContainer>
-          <p>You have successfully voted for the following countries:</p>
-          <ul>
-            {Object.entries(selectedPlaces)
-              .sort((a, b) => b[1] - a[1])
-              .map(([place, points], index) => {
-                return (
-                  <li key={index}>
-                    {place}: {points} Points
-                  </li>
-                );
-              })}
-          </ul>
-        </HighlightedContainer>
+        <p>You have successfully voted for the following countries:</p>
+        <ul>
+          {Object.entries(selectedPlaces)
+            .sort((a, b) => b[1] - a[1])
+            .map(([place, points], index) => {
+              return (
+                <li key={index}>
+                  {place}: {points} Points
+                </li>
+              );
+            })}
+        </ul>
+        <p>
+          Remember, your previous votes will be overwritten if you submit votes
+          again!
+        </p>
 
-        <NavLink to="/bet">
-          <button>back</button>
+        <NavLink to="/voting">
+          <button className="bigBlueButton">back</button>
         </NavLink>
       </MainContainer>
     </div>

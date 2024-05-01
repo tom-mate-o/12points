@@ -55,6 +55,15 @@
       height: 40px;
       padding: u.rem(2);
     }
+
+    &.friend {
+      span {
+        background-color: var(--votingbox-friend-bg);
+        border: none;
+        color: var(--button-text);
+      }
+    }
+
     select {
       width: u.rem(40);
       height: u.rem(40);
