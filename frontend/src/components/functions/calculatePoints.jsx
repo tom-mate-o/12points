@@ -1,5 +1,6 @@
 import React from 'react';
 import countries from '../../countries.json';
+import { FaStar } from 'react-icons/fa';
 
 export default function CalculatePoints({ userBet }) {
   let points = 0;
@@ -30,5 +31,9 @@ export default function CalculatePoints({ userBet }) {
     }
   });
 
-  return <div>User points: {points}</div>;
+  return (
+    <div className="friendlistGrid__name__points">
+      <FaStar /> <p>{points}</p>
+    </div>
+  );
 }

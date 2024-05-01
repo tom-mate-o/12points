@@ -2,10 +2,7 @@
 
 .buttonContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding-top: u.rem(15);
+  flex-direction: column;
   gap: u.rem(15);
   width: 100%;
 }

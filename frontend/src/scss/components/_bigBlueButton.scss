@@ -1,0 +1,27 @@
+@use '../util/' as u;
+
+.bigBlueButton {
+  display: flex;
+  justify-content: center;
+  gap: u.rem(7);
+  box-sizing: border-box;
+  background-color: var(--button);
+  border: none;
+  padding: u.rem(9);
+  width: 100%;
+  margin-inline: 0;
+  font-size: u.rem(20);
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--button-text);
+
+  p {
+    font-size: u.rem(20);
+    font-weight: bold;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--hoverButton);
+  }
+}

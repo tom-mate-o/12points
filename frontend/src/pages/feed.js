@@ -148,19 +148,27 @@ export default function Feed() {
         })}
       </MainContainer>
 
-      <div className="buttonContainer">
-        <NavLink to="/voting">
-          <SmallButtons>
-            <TiHeartFullOutline />
-            <p>give your personal 12 points</p>
-          </SmallButtons>
-        </NavLink>
-        <NavLink to="/bet">
-          <SmallButtons>
-            <FaRankingStar /> <p>place your bet for the final</p>
-          </SmallButtons>
-        </NavLink>
+      <div className="countdown">
+        {' '}
+        <Countdown />
       </div>
+
+      <MainContainer>
+        <div className="buttonContainer">
+          <NavLink to="/voting">
+            <button className="bigBlueButton">
+              <TiHeartFullOutline />
+              <p>give your points</p>
+            </button>
+          </NavLink>
+          <NavLink to="/bet">
+            <button className="bigBlueButton">
+              <FaRankingStar />
+              <p>place your bet</p>
+            </button>
+          </NavLink>
+        </div>
+      </MainContainer>
     </div>
   );
 }

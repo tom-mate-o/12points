@@ -21,6 +21,10 @@
 
   .friendlistGrid__name {
     grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+
+    gap: u.rem(5);
 
     h2 {
       font-size: u.rem(20);
@@ -32,6 +36,12 @@
       font-size: u.rem(15);
       font-weight: lighter;
     }
+  }
+
+  .friendlistGrid__name__points {
+    display: flex;
+    flex-direction: row;
+    gap: u.rem(5);
   }
 
   .friendlistGrid__buttonContainer {
