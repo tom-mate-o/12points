@@ -81,7 +81,6 @@ export default function Bet() {
     const fetchUser = async () => {
       if (userBets) {
         setUserSelectedPlaces(userBets);
-        console.log(userBets);
       }
     };
 
@@ -93,10 +92,7 @@ export default function Bet() {
     const bet = selectedPlaces;
     const success = await putRankingBetResultsToUserConfig(id, bet);
 
-    console.log(selectedPlaces);
-
     if (success) {
-      console.log(selectedPlaces);
       navigate('/betsuccessful', { state: selectedPlaces });
       console.log('success');
     }
@@ -111,7 +107,6 @@ export default function Bet() {
   };
 
   const pushPlaces = (e, countryName) => {
-    console.log(countryName, e.target.value);
     const place = Number(e.target.value);
 
     setDisabledPlaces((prevPlaces) => {

@@ -40,7 +40,6 @@ export default function Register() {
     const friendcode = friendcodeRaw;
     const username = form.username.value;
     const avatarUrl = `https://source.boringavatars.com/beam/40/${username}`;
-    console.log(avatarUrl);
 
     let file;
 

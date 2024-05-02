@@ -19,7 +19,6 @@ export default function FriendVoting() {
   const navigate = useNavigate();
 
   const { userId } = useParams();
-  console.log(userId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,7 +41,6 @@ export default function FriendVoting() {
     const fetchUser = async () => {
       if (userVotes) {
         setUserSelectedPoints(userVotes);
-        console.log(userVotes);
       }
     };
 

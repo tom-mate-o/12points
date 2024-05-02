@@ -140,7 +140,7 @@ export default function ResetPassword({ handleLogin, loggedIn }) {
   return (
     <div>
       <div className="title">
-        <p>Rest</p>
+        <p>Reset</p>
         <div className="title__lastRow">
           <p>Password</p>
         </div>

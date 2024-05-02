@@ -36,7 +36,7 @@ export default function CalculatePoints({ userBet }) {
       <div>
         <FaStar />
       </div>{' '}
-      <p>{points}</p>
+      <div>{points}</div>
     </div>
   );
 }

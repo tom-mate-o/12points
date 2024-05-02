@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { FaVoteYea } from 'react-icons/fa';
+import countries from '../countries.json';
 
 //Styled Components
 
@@ -14,7 +15,6 @@ export default function VoteSuccessful() {
 
   const location = useLocation();
   const selectedPlaces = location.state || {};
-  console.log(selectedPlaces);
 
   return (
     <div>
@@ -29,22 +29,44 @@ export default function VoteSuccessful() {
       </div>
 
       <MainContainer>
-        <p>You have successfully voted for the following countries:</p>
-        <ul>
+        <div className="infoText">
+          <p>You have successfully voted for the following countries:</p>
+        </div>
+        <div className="voteContainer success">
           {Object.entries(selectedPlaces)
             .sort((a, b) => b[1] - a[1])
             .map(([place, points], index) => {
+              const country = countries.find(
+                (country) => country.name === place
+              );
               return (
-                <li key={index}>
-                  {place}: {points} Points
-                </li>
+                <div className="voteContainer__rowContainer" key={index}>
+                  <div className="voteContainer__countryContainer">
+                    <img
+                      className="voteContainer__countryFlag"
+                      src={`/flags/${country.flag}.png`}
+                      alt={country.name}
+                    />
+                    <div className="voteContainer__countryContainer">
+                      <h3 className="country">
+                        <b> {place}</b>
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="voteContainer__pointsContainer friend">
+                    <span>{points}</span>
+                  </div>
+                </div>
               );
             })}
-        </ul>
-        <p>
-          Remember, your previous votes will be overwritten if you submit votes
-          again!
-        </p>
+          <br />
+        </div>
+        <div className="infoText">
+          <b>
+            Remember, your previous votes will be overwritten if you submit
+            votes again!
+          </b>
+        </div>
 
         <NavLink to="/voting">
           <button className="bigBlueButton">back</button>

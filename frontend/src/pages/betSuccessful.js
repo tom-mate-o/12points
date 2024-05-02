@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { FaVoteYea } from 'react-icons/fa';
+import countries from '../countries.json';
 
 //Styled Components
 import { Title } from '../styledComponents/title';
@@ -18,7 +19,6 @@ export default function BetSuccessful() {
 
   const location = useLocation();
   const selectedPlaces = location.state || {};
-  console.log(selectedPlaces);
 
   return (
     <div>
@@ -33,22 +33,47 @@ export default function BetSuccessful() {
       </div>
 
       <MainContainer>
-        <p>You have successfully placed your bet on the following countries:</p>
-        <ul>
+        <div className="infoText">
+          <p>
+            You have successfully submited the following ranking bet for the ESC
+            final 2024:
+          </p>
+        </div>
+        <div className="voteContainer success">
           {Object.entries(selectedPlaces)
             .sort((a, b) => a[1] - b[1])
-            .map(([place, rank], index) => {
+            .map(([place, points], index) => {
+              const country = countries.find(
+                (country) => country.name === place
+              );
               return (
-                <li key={index}>
-                  {place}: Rank {rank}
-                </li>
+                <div className="voteContainer__rowContainer" key={index}>
+                  <div className="voteContainer__countryContainer">
+                    <img
+                      className="voteContainer__countryFlag"
+                      src={`/flags/${country.flag}.png`}
+                      alt={country.name}
+                    />
+                    <div className="voteContainer__countryContainer">
+                      <h3 className="country">
+                        <b>{place}</b>
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="voteContainer__pointsContainer friend">
+                    <span>{points}.</span>
+                  </div>
+                </div>
               );
             })}
-        </ul>
-        <p>
-          Remember, your previous bets will be overwritten if you submit bets
-          again!
-        </p>
+          <br />
+        </div>
+        <div className="infoText">
+          <b>
+            Remember, your previous bet will be overwritten if you submit a
+            ranking bet again!
+          </b>
+        </div>
 
         <NavLink to="/bet">
           <button className="bigBlueButton">back</button>

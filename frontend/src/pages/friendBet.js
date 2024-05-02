@@ -57,7 +57,6 @@ export default function FriendBet() {
   const navigate = useNavigate();
 
   const { userId } = useParams();
-  console.log(userId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -84,7 +83,6 @@ export default function FriendBet() {
     const fetchUser = async () => {
       if (userBets) {
         setUserSelectedPlaces(userBets);
-        console.log(userBets);
       }
     };
 
@@ -96,10 +94,7 @@ export default function FriendBet() {
     const bet = selectedPlaces;
     const success = await putRankingBetResultsToUserConfig(id, bet);
 
-    console.log(selectedPlaces);
-
     if (success) {
-      console.log(selectedPlaces);
       navigate('/betsuccessful', { state: selectedPlaces });
       console.log('success');
     }
@@ -114,7 +109,6 @@ export default function FriendBet() {
   };
 
   const pushPlaces = (e, countryName) => {
-    console.log(countryName, e.target.value);
     const place = Number(e.target.value);
 
     setDisabledPlaces((prevPlaces) => {

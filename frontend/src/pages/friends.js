@@ -99,9 +99,9 @@ export default function Friends() {
             </div>
             <div className="friendlistGrid__name">
               <h3>{currentUser.username}</h3>
-              <p>
+              <div>
                 <CalculatePoints userBet={currentUser.bet} />
-              </p>
+              </div>
             </div>
             <div className="friendlistGrid__buttonContainer">
               {currentUser.voting &&
@@ -140,9 +140,9 @@ export default function Friends() {
               </div>
               <div className="friendlistGrid__name">
                 <h3>{user.username}</h3>
-                <p>
+                <div>
                   <CalculatePoints userBet={user.bet} />
-                </p>
+                </div>
               </div>
               <div className="friendlistGrid__buttonContainer">
                 {user.voting && Object.keys(user.voting).length > 0 ? (

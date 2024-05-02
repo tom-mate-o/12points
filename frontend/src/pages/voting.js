@@ -52,7 +52,6 @@ export default function Voting() {
     const fetchUser = async () => {
       if (userVotes) {
         setUserSelectedPoints(userVotes);
-        console.log(userVotes);
       }
     };
 
@@ -63,8 +62,6 @@ export default function Voting() {
     const id = decodedToken;
     const voting = selectedPoints;
     const success = await putVotingResultsToUserConfig(id, voting);
-
-    console.log(selectedPoints);
 
     if (success) {
       console.log('Voting submitted');
@@ -82,7 +79,6 @@ export default function Voting() {
   };
 
   const pushNumbers = (e, countryName) => {
-    console.log(countryName, e.target.value);
     const point = Number(e.target.value);
 
     setDisabledPoints((prevPoints) => {

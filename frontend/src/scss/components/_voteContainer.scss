@@ -3,6 +3,12 @@
 .voteContainer {
   width: 100%;
 
+  &.success {
+    display: flex;
+    flex-direction: column;
+    gap: u.rem(10);
+  }
+
   &__artistContainer {
     width: 100%;
     display: flex;
