@@ -24,7 +24,6 @@ export default function Login({ handleLogin, loggedIn }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('loggedIn: ' + loggedIn);
     if (loggedIn) {
       navigate('/feed');
     }
