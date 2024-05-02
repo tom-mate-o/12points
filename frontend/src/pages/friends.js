@@ -73,14 +73,16 @@ export default function Friends() {
       </div>
 
       <MainContainer>
-        You will receive points for every correct place.
-        <ul>
-          <li>🥇 1st place +25 points</li>
-          <li>🥈 2nd place +20 points</li>
-          <li>🥉 3rd place +15 points</li>
-          <li>each further place +5 points</li>
-          <li>correct last place +10 points</li>
-        </ul>
+        <div className="infoText">
+          <b>You will receive points for each correct place.</b>
+          <br />
+          <br />
+          <p>🥇 1st place +25 points</p>
+          <p>🥈 2nd place +20 points</p>
+          <p>🥉 3rd place +15 points</p>
+          <p>each further place +5 points</p>
+          <p>correct last place +10 points</p>
+        </div>
       </MainContainer>
 
       <MainContainer>

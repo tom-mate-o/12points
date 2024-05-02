@@ -77,91 +77,95 @@ export default function Register() {
 
   return (
     <div>
-      <Title>Register</Title>
+      <div className="title">
+        <p>Register</p>
+      </div>
       <MainContainer>
         <form ref={formRef} onSubmit={(e) => registerUser(e)}>
-          <Boxtitle>Avatar</Boxtitle>
-          <input
-            style={{ display: 'none' }}
-            type="file"
-            id="file"
-            name="avatar"
-          />
-          <label htmlFor="file">
-            <Button>Select a Profile Picture</Button>
-          </label>
+          <div>
+            <Boxtitle>E-Mail</Boxtitle>
+            <InputField>
+              <input
+                name="email1"
+                ref={email1Ref}
+                type="email"
+                placeholder="E-Mail*"
+                required
+                minLength="6"
+                maxLength="50"
+                pattern="[a-z0-9._%+]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title="Please enter a valid email address"
+              ></input>
+            </InputField>
+          </div>
 
-          <Boxtitle>E-Mail</Boxtitle>
-          <InputField>
-            <input
-              name="email1"
-              ref={email1Ref}
-              type="email"
-              placeholder="E-Mail*"
-              required
-              minLength="6"
-              maxLength="50"
-              pattern="[a-z0-9._%+]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              title="Please enter a valid email address"
-            ></input>
-          </InputField>
+          <div>
+            <Boxtitle>Repeat E-Mail</Boxtitle>
+            <InputField>
+              <input
+                name="email2"
+                ref={email2Ref}
+                type="email"
+                placeholder="Repeat Email*"
+                required
+                minLength="6"
+                maxLength="50"
+                pattern="[a-z0-9._%+]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title="Please enter a valid email address"
+              ></input>
+            </InputField>
+          </div>
 
-          <Boxtitle>Repeat E-Mail</Boxtitle>
-          <InputField>
-            <input
-              name="email2"
-              ref={email2Ref}
-              type="email"
-              placeholder="Repeat Email*"
-              required
-              minLength="6"
-              maxLength="50"
-              pattern="[a-z0-9._%+]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              title="Please enter a valid email address"
-            ></input>
-          </InputField>
+          <div>
+            <Boxtitle>Username</Boxtitle>
+            <InputField>
+              <input
+                name="username"
+                ref={usernameRef}
+                placeholder="Username*"
+                required
+                minLength="3"
+                maxLength="10"
+              ></input>
+            </InputField>
+          </div>
 
-          <Boxtitle>Username</Boxtitle>
-          <InputField>
-            <input
-              name="username"
-              ref={usernameRef}
-              placeholder="Username"
-              required
-              minLength="3"
-              maxLength="20"
-            ></input>
-          </InputField>
+          <div>
+            <Boxtitle>
+              Password
+              <br />
+            </Boxtitle>
+            <InputField>
+              <input
+                name="password1"
+                ref={password1Ref}
+                type="password"
+                placeholder="Password*"
+                required
+                minLength="6"
+                maxLength="60"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
+              ></input>
+            </InputField>
+          </div>
 
-          <Boxtitle>Password</Boxtitle>
-          <InputField>
-            <input
-              name="password1"
-              ref={password1Ref}
-              type="password"
-              placeholder="Password*"
-              required
-              minLength="6"
-              maxLength="60"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-              title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
-            ></input>
-          </InputField>
-
-          <Boxtitle>Repeat Password</Boxtitle>
-          <InputField>
-            <input
-              name="password2"
-              ref={password2Ref}
-              type="password"
-              placeholder="Repeat Password*"
-              required
-              minLength="6"
-              maxLength="60"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-              title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
-            ></input>
-          </InputField>
+          <div>
+            <Boxtitle>Repeat Password</Boxtitle>
+            <InputField>
+              <input
+                name="password2"
+                ref={password2Ref}
+                type="password"
+                placeholder="Repeat Password*"
+                required
+                minLength="6"
+                maxLength="60"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
+              ></input>
+            </InputField>
+          </div>
 
           <SubmitButton>
             <button type="submit">Register</button>
@@ -169,12 +173,12 @@ export default function Register() {
         </form>
       </MainContainer>
 
-      <div className="introtext">
-        <Boxtitle>
+      <div className="welcomeLink">
+        <div>
           Already have an Account?
           <br />
           <NavLink to="/login">Click here to Login!</NavLink>
-        </Boxtitle>
+        </div>
       </div>
     </div>
   );

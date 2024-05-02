@@ -5,7 +5,7 @@ import './costumToastifyCss.css';
 
 export default function showNotifications(message, type) {
   const options = {
-    position: 'bottom-right',
+    position: 'top-right',
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -21,7 +21,7 @@ export default function showNotifications(message, type) {
   };
 
   const customsuccess = {
-    position: 'bottom-right',
+    position: 'top-right',
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -38,7 +38,7 @@ export default function showNotifications(message, type) {
   };
 
   const customwarn = {
-    position: 'bottom-right',
+    position: 'top-right',
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,

@@ -4,13 +4,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { TbDoorExit } from 'react-icons/tb';
+
 import { jwtDecode } from 'jwt-decode';
 import showNotifications from '../components/showNotifications/showNotificationsToastify';
 import updateUserInDatabase from '../utils/updateUserInDatabase';
 
 //Styled Components
-import { Title } from '../styledComponents/title';
+
 import { SubTitle } from '../styledComponents/subTitle';
 import { MainContainer } from '../styledComponents/mainContainer';
 import { ProfileInfoGrid } from '../styledComponents/profileInfoGrid';
@@ -19,12 +19,9 @@ import { InputField } from '../styledComponents/inputField';
 import { Boxtitle } from '../styledComponents/boxtitle';
 import { WideButton } from '../styledComponents/wideButton';
 import { birbImages } from '../assets/birbs/birbsimgs';
-import { Button } from '../styledComponents/button';
 
 //Costum Hooks
 import useMongoDBUserData from '../costumHooks/useMongoDBUserData';
-
-import { Select, MenuItem } from '@mui/material';
 
 export default function Settings({ handleLogout }) {
   useEffect(() => {
@@ -55,8 +52,6 @@ export default function Settings({ handleLogout }) {
   const newUsername = useRef();
   const password1 = useRef();
   const password2 = useRef();
-  const notificationTime = useRef();
-  const newAvatarUrl = useRef();
 
   function saveSettings(event) {
     event.preventDefault();
@@ -67,7 +62,7 @@ export default function Settings({ handleLogout }) {
     }
 
     const formData = new FormData();
-    formData.append('newAvatar', newAvatarUrl.current.files[0]);
+
     formData.append('newUsername', newUsername.current.value);
     formData.append('newPassword', password1.current.value);
     // formData.append('theme', value);
@@ -79,15 +74,12 @@ export default function Settings({ handleLogout }) {
 
   return (
     <div>
-      <Title>Personal Settings</Title>
-
-      <NavLink to="/">
-        <WideButton onClick={handleClickLogoutButton}>
-          <span>
-            Logout <TbDoorExit />
-          </span>
-        </WideButton>
-      </NavLink>
+      <div className="title">
+        <p>Personal</p>
+        <div className="title__lastRow">
+          <p>Settings</p>
+        </div>
+      </div>
 
       <ProfileInfoGrid>
         <div className="avatar">
@@ -103,15 +95,15 @@ export default function Settings({ handleLogout }) {
           ></img>
         </div>
         <div className="username">{username}</div>
-        <input
-          style={{ display: 'none' }}
-          type="file"
-          id="file"
-          name="avatar"
-          ref={newAvatarUrl}
-        />
-        <label htmlFor="file"></label>
       </ProfileInfoGrid>
+
+      <MainContainer>
+        <button className="bigBlueButton" onClick={handleClickLogoutButton}>
+          <NavLink to="/">
+            <p>Logout</p>
+          </NavLink>
+        </button>
+      </MainContainer>
 
       <SubTitle>Username</SubTitle>
       <MainContainer>
@@ -140,8 +132,7 @@ export default function Settings({ handleLogout }) {
             title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
           ></input>
         </InputField>
-      </MainContainer>
-      <MainContainer>
+
         <Boxtitle>repeat new password</Boxtitle>
         <InputField>
           <input
@@ -156,7 +147,11 @@ export default function Settings({ handleLogout }) {
         </InputField>
       </MainContainer>
 
-      <WideButton onClick={saveSettings}>Save the Settings</WideButton>
+      <MainContainer>
+        <button className="bigBlueButton" onClick={saveSettings}>
+          Save the Settings
+        </button>
+      </MainContainer>
     </div>
   );
 }

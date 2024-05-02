@@ -55,15 +55,25 @@ export default function Login({ handleLogin, loggedIn }) {
       <div className="welcomeLogo">
         <img src={birbImages.logo} alt="logo" />
       </div>
+
       <div className="introtext">
         <p>
           <b>
-            <i>"TwelvePoints"</i>
+            Hey there 👋 and welcome to Twelve Points, the tip game for the ESC
+            2024.
           </b>
-          <br />
-          <br />
-          Welcome
         </p>
+        <p>
+          Together with the other group members, you bet on the placings in the
+          final and receive points for each correct one. The one with the most
+          points is the winner. It's as simple as that.
+        </p>
+        <p>
+          Of course, you can also check what your friends have predicted and
+          even give your own personal points to your favorites.
+        </p>
+
+        <p>On that note... 12 points go to....?</p>
       </div>
 
       <MainContainer>
@@ -83,18 +93,18 @@ export default function Login({ handleLogin, loggedIn }) {
         </form>
       </MainContainer>
 
-      <div className="introtext">
-        <Boxtitle>
+      <div className="welcomeLink">
+        <div>
           Don't Have an Account yet?
           <br />
           <NavLink to="/register">Click here to sign up!</NavLink>
-        </Boxtitle>
+        </div>
 
-        <Boxtitle>
+        <div>
           Forgot your Password?
           <br />
           <NavLink to="/resetpassword">Click here to get a new one!</NavLink>
-        </Boxtitle>
+        </div>
       </div>
     </div>
   );
