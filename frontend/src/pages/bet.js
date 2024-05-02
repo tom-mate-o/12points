@@ -20,7 +20,21 @@ import { MainContainer } from '../styledComponents/mainContainer';
 import { VoteContainer } from '../styledComponents/voteContainer';
 
 export default function Bet() {
-  const betOpen = true;
+  const [betOpen, setBetOpen] = useState(true);
+  const votingOpenDate = new Date('2022-05-11T08:00:00');
+  const votingCloseDate = new Date('2022-05-11T22:30:00');
+
+  // OPEN BET
+  //useEffect(() => {
+  // const checkVotingStatus = () => {
+  //    if (new Date() >= votingOpenDate && new Date() <= votingCloseDate) {
+  //      setBetOpen(true);
+  //    } else {
+  //      setBetOpen(false);
+  //    }
+  //  };
+  //  checkVotingStatus();
+  //}, []);
 
   const [isLoading, setIsLoading] = useState(true);
   const [rankArray, setRankArray] = useState([
@@ -243,9 +257,10 @@ export default function Bet() {
             ))
         ) : (
           <p>
-            The bet is not open yet.
+            The bet is not open.
             <br />
-            It will open as soon as the finalists are announced.
+            It will open as soon as the finalists are announced. And closes
+            before the ESC voting starts.
           </p>
         )}
         {betOpen && (

@@ -20,7 +20,22 @@ import { MainContainer } from '../styledComponents/mainContainer';
 import { VoteContainer } from '../styledComponents/voteContainer';
 
 export default function Voting() {
-  const voteOpen = true;
+  const [voteOpen, setVoteOpen] = useState(true);
+  const votingOpenDate = new Date('2022-05-11T08:00:00');
+  const votingCloseDate = new Date('2022-05-11T22:30:00');
+
+  // OPEN VOTING
+  //useEffect(() => {
+  // const checkVotingStatus = () => {
+  //    if (new Date() >= votingOpenDate && new Date() <= votingCloseDate) {
+  //      setVoteOpen(true);
+  //    } else {
+  //      setVoteOpen(false);
+  //    }
+  //  };
+  //  checkVotingStatus();
+  //}, []);
+
   const [disabledPoints, setDisabledPoints] = useState([]);
   const [selectedPoints, setSelectedPoints] = useState({});
   const [userSelectedPoints, setUserSelectedPoints] = useState({});
@@ -219,9 +234,10 @@ export default function Voting() {
             ))
         ) : (
           <p>
-            The vote is not open yet.
+            The vote is not open.
             <br />
-            It will open as soon as the finalists are announced.
+            It will open as soon as the finalists are announced. And closes
+            before the ESC voting starts.
           </p>
         )}
         {voteOpen && (

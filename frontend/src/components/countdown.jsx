@@ -15,6 +15,7 @@ export default function Countdown() {
     return () => clearInterval(timer);
   }, []);
 
+  // VOTING OPEN TIME
   function calculateTimeLeftOpen() {
     let year = new Date().getFullYear();
     const difference = +new Date(`${year}-05-11T08:00:00`) - +new Date();
@@ -33,6 +34,7 @@ export default function Countdown() {
     return timeLeft;
   }
 
+  // VOTING CLOSING TIME
   function calculateTimeLeftClosing() {
     let year = new Date().getFullYear();
     const difference = +new Date(`${year}-05-11T22:30:00`) - +new Date();

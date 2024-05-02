@@ -8,7 +8,7 @@
     "url": "https://eurovision.tv/participant/besa-2024",
     "spotify": "https://open.spotify.com/embed/track/669R9eowHoeQkrbnkUalI8?utm_source=generator&theme=0",
     "final": true,
-    "startnumber": 2,
+    "startnumber": 1,
     "points": 0,
     "rank": 0
   },
@@ -21,9 +21,9 @@
     "url": "https://eurovision.tv/participant/ladaniva-2024",
     "spotify": "https://open.spotify.com/embed/track/2MiEtw8UquKvxOwu47oTMu?utm_source=generator&theme=0",
     "final": true,
-    "startnumber": 3,
+    "startnumber": 1,
     "points": 0,
-    "rank": 2
+    "rank": 0
   },
   {
     "key": "esc24-3",
@@ -34,7 +34,7 @@
     "url": "https://eurovision.tv/participant/electric-fields-2024",
     "spotify": "https://open.spotify.com/embed/track/74mWVYv6xPilcalOxrQa5Y?utm_source=generator&theme=0",
     "final": true,
-    "startnumber": 4,
+    "startnumber": 1,
     "points": 0,
     "rank": 0
   },
@@ -47,9 +47,9 @@
     "url": "https://eurovision.tv/participant/kaleen-2024",
     "spotify": "https://open.spotify.com/embed/track/1QpWQMKfQ44QUN1dEg65T8?utm_source=generator&theme=0",
     "final": true,
-    "startnumber": 5,
+    "startnumber": 1,
     "points": 0,
-    "rank": 0
+    "rank": 1
   },
   {
     "key": "esc24-5",
@@ -62,7 +62,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 1
+    "rank": 0
   },
   {
     "key": "esc24-6",
@@ -75,7 +75,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 2
+    "rank": 0
   },
   {
     "key": "esc24-7",
@@ -114,7 +114,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 26
+    "rank": 0
   },
   {
     "key": "esc24-10",
@@ -193,7 +193,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 0
+    "rank": 26
   },
   {
     "key": "esc24-16",
@@ -339,7 +339,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 0
+    "rank": 2
   },
   {
     "key": "esc24-27",
@@ -365,7 +365,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 7
+    "rank": 0
   },
   {
     "key": "esc24-29",
@@ -378,7 +378,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 4
+    "rank": 0
   },
   {
     "key": "esc24-30",
@@ -417,7 +417,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 5
+    "rank": 0
   },
   {
     "key": "esc24-33",
@@ -457,7 +457,7 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 0
+    "rank": 4
   },
   {
     "key": "esc24-36",
@@ -483,6 +483,6 @@
     "final": true,
     "startnumber": 1,
     "points": 0,
-    "rank": 17
+    "rank": 0
   }
 ]
